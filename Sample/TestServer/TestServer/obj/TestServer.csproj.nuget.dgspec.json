@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\M\\Desktop\\GitHub\\WebServer\\WebServer\\WebServer.csproj": {}
+    "C:\\Users\\M\\Desktop\\GitHub\\WebServer\\Sample\\TestServer\\TestServer\\TestServer.csproj": {}
   },
   "projects": {
-    "C:\\Users\\M\\Desktop\\GitHub\\WebServer\\WebServer\\WebServer.csproj": {
+    "C:\\Users\\M\\Desktop\\GitHub\\WebServer\\Sample\\TestServer\\TestServer\\TestServer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\M\\Desktop\\GitHub\\WebServer\\WebServer\\WebServer.csproj",
-        "projectName": "WebServer",
-        "projectPath": "C:\\Users\\M\\Desktop\\GitHub\\WebServer\\WebServer\\WebServer.csproj",
+        "projectUniqueName": "C:\\Users\\M\\Desktop\\GitHub\\WebServer\\Sample\\TestServer\\TestServer\\TestServer.csproj",
+        "projectName": "TestServer",
+        "projectPath": "C:\\Users\\M\\Desktop\\GitHub\\WebServer\\Sample\\TestServer\\TestServer\\TestServer.csproj",
         "packagesPath": "C:\\Users\\M\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\M\\Desktop\\GitHub\\WebServer\\WebServer\\obj\\",
+        "outputPath": "C:\\Users\\M\\Desktop\\GitHub\\WebServer\\Sample\\TestServer\\TestServer\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\M\\AppData\\Roaming\\NuGet\\NuGet.Config",
