@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\M\\Desktop\\GitHub\\WebServer\\Sample\\TestServer\\TestServer\\TestServer.csproj": {}
+    "D:\\m\\WebServer\\Sample\\TestServer\\TestServer\\TestServer.csproj": {}
   },
   "projects": {
-    "C:\\Users\\M\\Desktop\\GitHub\\WebServer\\Sample\\TestServer\\TestServer\\TestServer.csproj": {
+    "D:\\m\\WebServer\\Sample\\TestServer\\TestServer\\TestServer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\M\\Desktop\\GitHub\\WebServer\\Sample\\TestServer\\TestServer\\TestServer.csproj",
+        "projectUniqueName": "D:\\m\\WebServer\\Sample\\TestServer\\TestServer\\TestServer.csproj",
         "projectName": "TestServer",
-        "projectPath": "C:\\Users\\M\\Desktop\\GitHub\\WebServer\\Sample\\TestServer\\TestServer\\TestServer.csproj",
-        "packagesPath": "C:\\Users\\M\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\M\\Desktop\\GitHub\\WebServer\\Sample\\TestServer\\TestServer\\obj\\",
+        "projectPath": "D:\\m\\WebServer\\Sample\\TestServer\\TestServer\\TestServer.csproj",
+        "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
+        "outputPath": "D:\\m\\WebServer\\Sample\\TestServer\\TestServer\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\M\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -68,7 +68,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }
