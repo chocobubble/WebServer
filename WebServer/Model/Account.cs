@@ -1,5 +1,5 @@
 ﻿using System.Collections;
-
+/*
 namespace WebServer.Model
 {
     public class Account
@@ -56,3 +56,4 @@ namespace WebServer.Model
         public string UserPassword { get; set; }
     }
 }
+*/

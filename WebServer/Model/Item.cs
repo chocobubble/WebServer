@@ -13,7 +13,7 @@ namespace WebServer.Model
 
         public string ShowInfo()
         {
-            return $"아이템 Id : {Id}  아이템 가격 : {Price}";
+            return $"아이템 Id : {Id}  아이템 가격 : {Price}\n";
         }
 
         public int Id { get; set; }

@@ -1,10 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
 using WebServer.Model;
 
-// ·©Å· ÄÁÆ®·Ñ·¯¸¦ ¸¸µé°í
-// ·©Å·À» ÀúÀåÇÏ´Â ±â´É
-// ÀüÃ¼ ·©Å·À» ºÒ·¯¿À´Â ±â´É (1~100µî±îÁö)
-// ³ªÀÇ ·©Å·À» ºÒ·¯¿À´Â ±â´É (1~100µî±îÁö)
+// ï¿½ï¿½Å· ï¿½ï¿½Æ®ï¿½Ñ·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½
+// ï¿½ï¿½Å·ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½
+// ï¿½ï¿½Ã¼ ï¿½ï¿½Å·ï¿½ï¿½ ï¿½Ò·ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ (1~100ï¿½ï¿½ï¿½ï¿½ï¿½)
+// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å·ï¿½ï¿½ ï¿½Ò·ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ (1~100ï¿½ï¿½ï¿½ï¿½ï¿½)
 
 namespace WebServer.Controllers
 { 
@@ -14,6 +14,8 @@ namespace WebServer.Controllers
     {
 
         static private AccountManager _accountManager = new AccountManager();
+
+        static private Shop _shop = new Shop();
 
         private readonly ILogger<RankingController> _logger;
 
@@ -27,11 +29,11 @@ namespace WebServer.Controllers
         {
             if (id != "" && _accountManager.AddAccount(id, pwd))
             {
-                return "°èÁ¤ »ı¼º¿¡ ¼º°øÇß½À´Ï´Ù.";
+                return "ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ß½ï¿½ï¿½Ï´ï¿½.";
             }
             else
             {
-                return "°èÁ¤ »ı¼º¿¡ ½ÇÆĞÇß½À´Ï´Ù.";
+                return "ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ß½ï¿½ï¿½Ï´ï¿½.";
             }
         }
 
@@ -52,11 +54,11 @@ namespace WebServer.Controllers
         {
             if (_accountManager.SetScore(id, score))
             {
-                return "½ºÄÚ¾î ¼³Á¤¿¡ ¼º°øÇß½À´Ï´Ù.";
+                return "ï¿½ï¿½ï¿½Ú¾ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ß½ï¿½ï¿½Ï´ï¿½.";
             }
             else
             {
-                return "ÇØ´ç id°¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.";
+                return "ï¿½Ø´ï¿½ idï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê½ï¿½ï¿½Ï´ï¿½.";
             }
         }
 
@@ -67,9 +69,62 @@ namespace WebServer.Controllers
         }
 
         [HttpGet]
+        public string PrintMyInfo()
+        {
+            return _accountManager.PrintLoginUserInfo();
+        }
+
+        [HttpGet]
         public string PrintAllScorer()
         {
             return _accountManager.PrintAllScorer();
+        }
+
+        [HttpGet]
+        public string PrintAllItemsInShop()
+        {
+            return _shop.ShowItems();
+        }
+
+        [HttpPost]
+        public string PurchaseItem(int idx)
+        {
+            int myGold = _accountManager.GetLoginUserGold();
+            if (myGold == -1)
+            {
+                return "ë¡œê·¸ì¸ì„ ë¨¼ì € í•´ì•¼í•©ë‹ˆë‹¤ .";
+            }
+
+            int price = _shop.GetItemPrice(idx);
+            if (price == -1)
+            {
+                return "ì˜¬ë°”ë¥´ì§€ ì•Šì€ ìƒí’ˆì…ë‹ˆë‹¤.";
+            }
+
+            if (price > myGold)
+            {
+                return "ì†Œì§€í•˜ê³  ìˆëŠ” ê³¨ë“œê°€ ë¶€ì¡± ";
+            }
+
+            if (_accountManager.SetLogInUserGold(myGold - price))
+            {
+                if (_accountManager.LoginUserGetItem(_shop.GetItem(idx)))
+                {
+                    return "ì•„ì´í…œ êµ¬ë§¤ì— ì„±ê³µ ";
+                }
+                else
+                {
+                    if (_accountManager.SetLogInUserGold(myGold))
+                    {
+                        return "ì•„ì´í…œ êµ¬ë§¤ì— ì‹¤íŒ¨í–ˆê³  ìœ ì € ê³¨ë“œ ë³µêµ¬ì— ì„±ê³µ ";
+                    }
+                    else
+                    {
+                        return "ì•„ì´í…œ êµ¬ë§¤ ì‹¤íŒ¨ ë° ìœ ì € ê³¨ë“œ ë³µêµ¬ ì‹¤íŒ¨ ";
+                    }
+                }
+            }
+            return "ì•„ì´í…œ êµ¬ë§¤ì— ì‹¤íŒ¨ ";
         }
 
         [HttpPost]

@@ -18,9 +18,29 @@ namespace WebServer.Model
             string res = "";
             foreach (Item item in _items) 
             {
-                res += item.ShowInfo() + '\n';
+                res += item.ShowInfo();
             }
             return res;
+        }
+
+        public int GetItemPrice(int idx)
+        {
+            if (idx < 0 || idx >= _items.Count())
+            {
+                return -1;
+            }
+            return _items[idx].Price;
+
+        }
+
+        public Item GetItem(int idx)
+        {
+            if (idx < 0 || idx >= _items.Count())
+            {
+                return null;
+            }
+            return _items[idx];
+
         }
 
         private List<Item> _items = new List<Item>();
