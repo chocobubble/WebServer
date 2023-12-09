@@ -84,6 +84,7 @@ namespace WebServer.Model
 
         public int GetUserRank(string id)
         {
+            _accountList.Sort();
             for (int idx = 0; idx < _accountList.Count; idx++)
             {
                 if (_accountList[idx].PlayerId == id)
