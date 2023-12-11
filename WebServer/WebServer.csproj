@@ -19,6 +19,7 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Grpc" Version="2.46.6" />
+    <PackageReference Include="Google.Protobuf.Tools" Version="3.25.1" />
   </ItemGroup>
 
   <ItemGroup>

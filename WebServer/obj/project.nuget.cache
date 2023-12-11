@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "ENMl27cbiMesacw1W+bcVay0+ugKfMeQ+ITQWgOoNw/DnVFx6kgzpiu5p31SiKzVybnxFKPaV6vLVuaZG4+s4w==",
+  "dgSpecHash": "ZqEBDlFyvz9MZOkXBG4fpcnT2W67yErV29Z3mAVq5/kwZDy68TgERnFTVydknsqxTaruBVwb4EnOwv0+2xLu7g==",
   "success": true,
   "projectFilePath": "/Users/m/WebServer/WebServer/WebServer.csproj",
   "expectedPackageFiles": [
     "/Users/m/.nuget/packages/google.protobuf/3.25.1/google.protobuf.3.25.1.nupkg.sha512",
+    "/Users/m/.nuget/packages/google.protobuf.tools/3.25.1/google.protobuf.tools.3.25.1.nupkg.sha512",
     "/Users/m/.nuget/packages/grpc/2.46.6/grpc.2.46.6.nupkg.sha512",
     "/Users/m/.nuget/packages/grpc.aspnetcore/2.59.0/grpc.aspnetcore.2.59.0.nupkg.sha512",
     "/Users/m/.nuget/packages/grpc.aspnetcore.server/2.59.0/grpc.aspnetcore.server.2.59.0.nupkg.sha512",

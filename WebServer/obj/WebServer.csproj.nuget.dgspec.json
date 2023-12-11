@@ -43,6 +43,10 @@
               "target": "Package",
               "version": "[3.25.1, )"
             },
+            "Google.Protobuf.Tools": {
+              "target": "Package",
+              "version": "[3.25.1, )"
+            },
             "Grpc": {
               "target": "Package",
               "version": "[2.46.6, )"
