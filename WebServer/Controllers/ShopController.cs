@@ -26,7 +26,7 @@ namespace WebServer.Controllers
         {
             return shop.ShowItems();
         }
-
+        /*
         [HttpPost]
         public string PurchaseItem(int idx)
         {
@@ -67,5 +67,6 @@ namespace WebServer.Controllers
             }
             return "아이템 구매에 실패 ";
         }
+        */
     }
 }
