@@ -2,7 +2,7 @@ syntax = "proto3";
 
 option csharp_namespace = "WebServer.Protos";
 
-message ChracterData
+message CharacterData
 {
 	int32 level = 1;
 	int32 exp = 2;
