@@ -1,74 +1,44 @@
 using Microsoft.AspNetCore.Mvc;
 using WebServer.Model;
-
-
+using WebServer.Service.Interface;
 
 namespace WebServer.Controllers
 { 
     [ApiController]
     [Route("[controller]/[action]")]
     public class AccountController : ControllerBase
-    {
-
-        static private AccountManager _accountManager = new AccountManager();
-
-        public static AccountManager accountManagerInstance
-        {
-            get
-            {
-                return _accountManager;
-            }
-        }
-        
+    { 
         private readonly ILogger<AccountController> _logger;
+        private readonly IAccountService _accountService;
 
-        public AccountController(ILogger<AccountController> logger)
+        public AccountController(ILogger<AccountController> logger, IAccountService accountService)
         {
             _logger = logger;
+            this._accountService = accountService;
         }
 
         [HttpPost]
-        public string CreateID(string id, string pwd)
+        public string CreateAccount(string userId, string userPwd)
         {
-            if (id != "" && _accountManager.AddAccount(id, pwd))
-            {
-                return "���� ������ �����߽��ϴ�.";
-            }
-            else
-            {
-                return "���� ������ �����߽��ϴ�.";
-            }
+            return _accountService.CreateAccount(userId, userPwd);
         }
 
         [HttpPost]
-        public string Login(string id, string pwd)
+        public string Login(string userId, string userPwd)
         {
-            return _accountManager.Login(id, pwd);
+            return _accountService.Login(userId, userPwd);
         }
 
         [HttpPost]
-        public string LogOut()
+        public string LogOut(string userId)
         {
-            return _accountManager.LogOut();
-        }
-
-        [HttpPost]
-        public string SetScore(string id, int score)
-        {
-            if (_accountManager.SetScore(id, score))
-            {
-                return "���ھ� ������ �����߽��ϴ�.";
-            }
-            else
-            {
-                return "�ش� id�� �������� �ʽ��ϴ�.";
-            }
+            return _accountService.LogOut(userId);
         }
 
         [HttpPost]
         public void CreateAccounts(int num)
         {
-            _accountManager.CreateAccounts(num);
+            _accountService.TestCreateAccounts(num);
         }
     }
 }

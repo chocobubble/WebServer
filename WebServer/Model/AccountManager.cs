@@ -44,7 +44,6 @@ namespace WebServer.Model
                 _logInUserName = userName;
                 return "로그인 되었습니다.";
             }
-
         }
 
         public string LogOut()

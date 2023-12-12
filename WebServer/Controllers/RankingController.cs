@@ -20,9 +20,7 @@ namespace WebServer.Controllers
         {
             _logger = logger;
         }
-
-        
-
+        /*
         [HttpGet]
         public string GetMyRank()
         {
@@ -40,6 +38,7 @@ namespace WebServer.Controllers
         {
             return AccountController.accountManagerInstance.PrintAllScorer();
         }
+        */
     }
 }
 
