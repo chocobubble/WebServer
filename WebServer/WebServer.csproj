@@ -31,13 +31,6 @@
     <None Remove="Protos\greet.proto" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Service\" />
-    <Folder Include="Repository\" />
-    <Folder Include="Service\Interface\" />
-    <Folder Include="Repository\Interface\" />
-    <Folder Include="Protos\" />
-  </ItemGroup>
-  <ItemGroup>
     <Protobuf Include="Protos\greet.proto" GrpcServices="">
       <Access></Access>
       <ProtoCompile></ProtoCompile>

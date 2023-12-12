@@ -6,6 +6,7 @@ namespace WebServer.Service
 {
 	public class ProtoTestService
 	{
+		/*
 		private HelloRequest _helloRequest;
 
 		public ProtoTestService()
@@ -38,6 +39,7 @@ namespace WebServer.Service
 			return newHello.Name;
 
         }
+		*/
 	}
 }
 

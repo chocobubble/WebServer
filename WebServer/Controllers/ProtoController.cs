@@ -17,12 +17,15 @@ namespace WebServer.Controllers
 
         private ProtoTestService _protoTestService;
 
+        private LoadService _loadService;
+
         public ProtoController(ILogger<ProtoController> logger)
         {
             _logger = logger;
             _protoTestService = new ProtoTestService();
+            _loadService = new LoadService();
         }
-
+        /*
         [HttpGet]
         public string Hello()
         {
@@ -32,9 +35,14 @@ namespace WebServer.Controllers
         [HttpGet]
         public string NewHello()
         {
-            return _protoTestService.SerializeHello();23
+            return _protoTestService.SerializeHello();
         }
-
+        */
+        [HttpGet]
+        public string LoadCharacterData()
+        {
+            return _loadService.LoadData();
+        }
     }
 }
 
