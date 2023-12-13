@@ -28,17 +28,17 @@ namespace WebServer.Protos
         {
             byte[] descriptorData = global::System.Convert.FromBase64String(
                 string.Concat(
-                  "CghteS5wcm90byKIAQoMQ2hyYWN0ZXJEYXRhEg0KBWxldmVsGAEgASgFEgsK",
-                  "A2V4cBgCIAEoBRISCgpwbGF5ZXJOYW1lGAMgASgJEgwKBGdvbGQYBCABKAUS",
-                  "JwoOd2VhcG9uU2F2ZURhdGEYBSABKAsyDy5XZWFwb25TYXZlRGF0YRIRCgly",
-                  "aWZsZUFtbW8YBiABKAUigQEKDldlYXBvblNhdmVEYXRhEhIKCndlcG9uTGV2",
-                  "ZWwYASABKAUSHQoVd2Vwb25FbmhhbmNlbWVudExldmVsGAIgASgFIjwKCldl",
-                  "YXBvblR5cGUSDQoJRVdUX1JJRkxFEAASDgoKRVdUX1BJU1RPTBABEg8KC0VX",
-                  "VF9TSE9UR1VOEAJCE6oCEFdlYlNlcnZlci5Qcm90b3NiBnByb3RvMw=="));
+                  "CghteS5wcm90byKJAQoNQ2hhcmFjdGVyRGF0YRINCgVsZXZlbBgBIAEoBRIL",
+                  "CgNleHAYAiABKAUSEgoKcGxheWVyTmFtZRgDIAEoCRIMCgRnb2xkGAQgASgF",
+                  "EicKDndlYXBvblNhdmVEYXRhGAUgASgLMg8uV2VhcG9uU2F2ZURhdGESEQoJ",
+                  "cmlmbGVBbW1vGAYgASgFIoEBCg5XZWFwb25TYXZlRGF0YRISCgp3ZXBvbkxl",
+                  "dmVsGAEgASgFEh0KFXdlcG9uRW5oYW5jZW1lbnRMZXZlbBgCIAEoBSI8CgpX",
+                  "ZWFwb25UeXBlEg0KCUVXVF9SSUZMRRAAEg4KCkVXVF9QSVNUT0wQARIPCgtF",
+                  "V1RfU0hPVEdVThACQhOqAhBXZWJTZXJ2ZXIuUHJvdG9zYgZwcm90bzM="));
             descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
                 new pbr::FileDescriptor[] { },
                 new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::WebServer.Protos.ChracterData), global::WebServer.Protos.ChracterData.Parser, new[]{ "Level", "Exp", "PlayerName", "Gold", "WeaponSaveData", "RifleAmmo" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::WebServer.Protos.CharacterData), global::WebServer.Protos.CharacterData.Parser, new[]{ "Level", "Exp", "PlayerName", "Gold", "WeaponSaveData", "RifleAmmo" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::WebServer.Protos.WeaponSaveData), global::WebServer.Protos.WeaponSaveData.Parser, new[]{ "WeponLevel", "WeponEnhancementLevel" }, null, new[]{ typeof(global::WebServer.Protos.WeaponSaveData.Types.WeaponType) }, null, null)
                 }));
         }
@@ -46,16 +46,16 @@ namespace WebServer.Protos
 
     }
     #region Messages
-    public sealed partial class ChracterData : pb::IMessage<ChracterData>
+    public sealed partial class CharacterData : pb::IMessage<CharacterData>
 #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
         , pb::IBufferMessage
 #endif
     {
-        private static readonly pb::MessageParser<ChracterData> _parser = new pb::MessageParser<ChracterData>(() => new ChracterData());
+        private static readonly pb::MessageParser<CharacterData> _parser = new pb::MessageParser<CharacterData>(() => new CharacterData());
         private pb::UnknownFieldSet _unknownFields;
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-        public static pb::MessageParser<ChracterData> Parser { get { return _parser; } }
+        public static pb::MessageParser<CharacterData> Parser { get { return _parser; } }
 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -73,7 +73,7 @@ namespace WebServer.Protos
 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-        public ChracterData()
+        public CharacterData()
         {
             OnConstruction();
         }
@@ -82,7 +82,7 @@ namespace WebServer.Protos
 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-        public ChracterData(ChracterData other) : this()
+        public CharacterData(CharacterData other) : this()
         {
             level_ = other.level_;
             exp_ = other.exp_;
@@ -95,9 +95,9 @@ namespace WebServer.Protos
 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-        public ChracterData Clone()
+        public CharacterData Clone()
         {
-            return new ChracterData(this);
+            return new CharacterData(this);
         }
 
         /// <summary>Field number for the "level" field.</summary>
@@ -188,12 +188,12 @@ namespace WebServer.Protos
         [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
         public override bool Equals(object other)
         {
-            return Equals(other as ChracterData);
+            return Equals(other as CharacterData);
         }
 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-        public bool Equals(ChracterData other)
+        public bool Equals(CharacterData other)
         {
             if (ReferenceEquals(other, null))
             {
@@ -354,7 +354,7 @@ namespace WebServer.Protos
 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-        public void MergeFrom(ChracterData other)
+        public void MergeFrom(CharacterData other)
         {
             if (other == null)
             {

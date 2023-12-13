@@ -4,9 +4,9 @@ using WebServer.Protos;
 
 namespace WebServer.Service.Interface
 {
-    public interface ILoadService
+    public interface ISaveService
     {
-        public string LoadData();
+        public string SaveData(string name, Int32 level);
     }
 }
 
