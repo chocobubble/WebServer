@@ -1,1 +1,11 @@
-.vs
+# Visual Studio 2015 user specific files
+.vs/
+.vscode/
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+WebServer/obj/*

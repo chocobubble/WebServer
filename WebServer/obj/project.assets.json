@@ -1499,13 +1499,5 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
       }
     }
-  },
-  "logs": [
-    {
-      "code": "Undefined",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "캐시 파일 C:\\Users\\M\\Desktop\\GitHub\\WebServer\\WebServer\\obj\\project.nuget.cache을(를) 읽는 동안 문제가 발생했습니다. Invalid property identifier character: <. Path 'version', line 3, position 0."
-    }
-  ]
+  }
 }

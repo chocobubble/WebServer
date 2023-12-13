@@ -34,12 +34,5 @@
     "C:\\Users\\M\\.nuget\\packages\\system.memory\\4.5.3\\system.memory.4.5.3.nupkg.sha512",
     "C:\\Users\\M\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "Undefined",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "캐시 파일 C:\\Users\\M\\Desktop\\GitHub\\WebServer\\WebServer\\obj\\project.nuget.cache을(를) 읽는 동안 문제가 발생했습니다. Invalid property identifier character: <. Path 'version', line 3, position 0."
-    }
-  ]
+  "logs": []
 }
