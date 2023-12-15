@@ -1,46 +1,62 @@
 ﻿using System;
 using WebServer.Model;
+using WebServer.Protos;
 using WebServer.Repository.Interface;
 
 namespace WebServer.Repository
 {
 	public class AccountRepository : IAccountRepository
 	{
-		//private AccountManager _accountManager;
-        private Dictionary<string, AccountInfo> _accountTable;
+        private Dictionary<string, AccountData> _accountTable;
 
         public AccountRepository()
 		{
-			//_accountManager = new AccountManager();
-            _accountTable = new Dictionary<string, AccountInfo>();
+            _accountTable = new Dictionary<string, AccountData>();
         }
 
-		public bool CreateAccount(string userId, string userPwd)
+		public bool CreateAccount(string inputId, string inputPwd)
 		{
-            if (_accountTable.ContainsKey(userId))
+            if (_accountTable.ContainsKey(inputId))
             {
                 return false;
             }
             else
             {
-                AccountInfo newAccountInfo = new AccountInfo(userId, userPwd);
-                _accountTable.Add(userId, newAccountInfo);
+                AccountData newAccountData = new AccountData(inputId, inputPwd);
+                _accountTable.Add(inputId, newAccountData);
                 return true;
             }
 		}
 
-        public AccountInfo? GetUserInfo(string userId, string userPwd)
+        public bool IsEnrolledAccount(string inputId)
+        {
+            if (_accountTable.ContainsKey(inputId))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public bool IsCorrectPassword(string inputId, string inputPwd)
+        {
+            if (_accountTable[inputId].UserPassword == inputPwd)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public CharacterData GetUserCharacterData(string userId)
 		{
             if (_accountTable.ContainsKey(userId))
             {
-                if (_accountTable[userId].UserPassword == userPwd)
-                {
-                    return _accountTable[userId];
-                }
-                else
-                {
-                    return null;
-                }
+                return _accountTable[userId].characterData;
             }
             else
             {

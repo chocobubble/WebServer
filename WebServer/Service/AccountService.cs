@@ -20,9 +20,9 @@ namespace WebServer.Service
             _loginUsers = new HashSet<string>();
         }
 
-        public string CreateAccount(string userId, string userPwd)
+        public string CreateAccount(string inputId, string inputPwd)
         {
-            if (_accountRepository.CreateAccount(userId, userPwd))
+            if (_accountRepository.CreateAccount(inputId, inputPwd))
             {
                 return "계정 생성에 성공했습니다";
             }
@@ -32,29 +32,33 @@ namespace WebServer.Service
             }
         }
 
-        public string Login(string userId, string userPwd)
+        public string Login(string inputId, string inputPwd)
         {
-            if (_accountRepository.GetUserInfo(userId, userPwd) == null)
+            if (!_accountRepository.IsEnrolledAccount(inputId))
             {
-                return "로그인에 실패했습니다";
+                return "등록되지 않은 계정입니다";
+            }
+            else if (!_accountRepository.IsCorrectPassword(inputId, inputPwd))
+            {
+                return "비밀번호가 틀렸습니다";
             }
             else
             {
-                _loginUsers.Add(userId);
+                _loginUsers.Add(inputId);
                 return "로그인에 성공했습니다";
             }
             
         }
 
-        public string LogOut(string userId)
+        public string LogOut(string inputId)
         {
-            if (!_loginUsers.Contains(userId))
+            if (!_loginUsers.Contains(inputId))
             {
                 return "로그인을 먼저 해야합니다";
             }
             else
             {
-                _loginUsers.Remove(userId);
+                _loginUsers.Remove(inputId);
                 return "로그아웃 되었습니다";
             }
         }

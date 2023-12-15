@@ -15,24 +15,24 @@ namespace WebServer.Controllers
         private readonly LoadService _loadService;
         private readonly SaveService _saveService;
 
-        public DataController(ILogger<DataController> logger, ICharacterDataRepository characterDataRepository)
+        public DataController(ILogger<DataController> logger, IAccountRepository accountRepository)
         {
             _logger = logger;
-            _loadService = new LoadService(characterDataRepository);
-            _saveService = new SaveService(characterDataRepository);
+            _loadService = new LoadService(accountRepository);
+            _saveService = new SaveService(accountRepository);
         }
 
         [HttpPost]
-        public string SaveCharacterData(string userName, int level)
+        public string SaveCharacterData(string userName, byte[] bytes)
         {
-            _saveService.SaveData(userName, level);
+            _saveService.SaveData(userName, bytes);
             return "캐릭터 데이터 저장에 성공했습니다";
         }
 
         [HttpGet]
-        public byte[] LoadCharacterData()
+        public byte[] LoadCharacterData(string userId)
         {
-            return _loadService.GetBytes();
+            return _loadService.LoadData(userId);
         }
     }
 }

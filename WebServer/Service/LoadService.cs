@@ -9,18 +9,17 @@ namespace WebServer.Service
 {
     public class LoadService
     {
-        private ICharacterDataRepository _characterDataRepository;
+        private IAccountRepository _accountRepository;
 
-        public LoadService(ICharacterDataRepository characterDataRepository)
+        public LoadService(IAccountRepository accountRepository)
         {
-            _characterDataRepository = characterDataRepository;
+            _accountRepository = accountRepository;
         }
 
-        public string LoadData()
+        public byte[] LoadData(string userId)
         {
-            string res = $"Level : {_characterDataRepository.GetCharacterData().Level}\n";
-            res += $"PlayerName : {_characterDataRepository.GetCharacterData().PlayerName}\n";
-            return res;
+            byte[] bytes = _accountRepository.GetUserCharacterData(userId).ToByteArray();
+            return bytes;
         }
 
         public string ProtoTest()

@@ -5,9 +5,9 @@ namespace WebServer.Service.Interface
 {
 	public interface IAccountService
 	{
-        public string CreateAccount(string id, string pwd);
-        public string Login(string userId, string userPwd);
-        public string LogOut(string userId);
+        public string CreateAccount(string inputId, string inputPwd);
+        public string Login(string inputId, string inputPwd);
+        public string LogOut(string inputId);
         public void TestCreateAccounts(int num);
     }
 }

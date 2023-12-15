@@ -6,7 +6,7 @@ namespace WebServer.Service.Interface
 {
     public interface ILoadService
     {
-        public string LoadData();
+        public string LoadData(string userId);
     }
 }
 

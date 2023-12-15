@@ -23,11 +23,11 @@ namespace WebServer.Controllers
 
         private LoadService _loadService;
 
-        public ProtoController(ILogger<ProtoController> logger, ICharacterDataRepository characterDataRepository)
+        public ProtoController(ILogger<ProtoController> logger, IAccountRepository accountRepository)
         {
             _logger = logger;
             _protoTestService = new ProtoTestService();
-            _loadService = new LoadService(characterDataRepository);
+            _loadService = new LoadService(accountRepository);
         }
         /*
         [HttpGet]
@@ -60,7 +60,11 @@ namespace WebServer.Controllers
             characterData.Exp = 5;
             characterData.PlayerName = "palyer";
             characterData.Gold = 100;
-            characterData.WeaponSaveData = weaponSaveData;
+            //characterData.WeaponSaveData = weaponSaveData;
+            characterData.WeaponSaveData = new WeaponSaveData();
+            characterData.WeaponSaveData.WeaponLevel = 2;
+            characterData.WeaponSaveData.WeaponEnhancementLevel = 3;
+            characterData.WeaponSaveData.WeaponType = WeaponSaveData.Types.WeaponType.EwtRifle;
             characterData.RifleAmmo = 1000;
             //byte[] bytes = Encoding.UTF8.GetBytes("prototo");
             byte[] bytes = characterData.ToByteArray();
