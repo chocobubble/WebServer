@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+option csharp_namespace = "WebServer.Protos";
+
+message CharacterData
+{
+	int32 level = 1;
+	int32 exp = 2;
+	string playerName = 3;
+	int32 gold = 4;
+	WeaponSaveData weaponSaveData = 5;
+	int32 rifleAmmo = 6;
+}
+
+message WeaponSaveData
+{
+	enum WeaponType
+	{
+		EWT_RIFLE = 0;
+		EWT_PISTOL = 1;
+		EWT_SHOTGUN = 2;
+	}
+
+	int32 weponLevel = 1;
+	int32 weponEnhancementLevel = 2;
+}

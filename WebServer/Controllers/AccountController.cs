@@ -1,71 +1,44 @@
 using Microsoft.AspNetCore.Mvc;
 using WebServer.Model;
-
-
+using WebServer.Service.Interface;
 
 namespace WebServer.Controllers
 { 
     [ApiController]
-    [Route("[controller]")]
+    [Route("[controller]/[action]")]
     public class AccountController : ControllerBase
-    {
-
-        static private Account currentAccount = new Account();
-        //private static readonly string[] Summaries = new[]
-        //{
-        //"Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        //};
-
+    { 
         private readonly ILogger<AccountController> _logger;
+        private readonly IAccountService _accountService;
 
-        public AccountController(ILogger<AccountController> logger)
+        public AccountController(ILogger<AccountController> logger, IAccountService accountService)
         {
             _logger = logger;
+            this._accountService = accountService;
         }
-
-        //[HttpGet(Name = "GetAccount")]
-        //public IEnumerable<Account> Get()
-        //{
-        //    return Enumerable.Range(1, 5).Select(index => new Account
-        //    {
-        //        Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-        //        TemperatureC = Random.Shared.Next(-20, 55),
-        //        Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-        //    })
-        //    .ToArray();
-        //}
-
 
         [HttpPost]
-        public IActionResult AddId(string id, string pwd)
+        public string CreateAccount(string userId, string userPwd)
         {
-            currentAccount.AddAccount(id, pwd);
-            return Content(currentAccount.GetAccountNumber());
+            return _accountService.CreateAccount(userId, userPwd);
         }
 
-        //[HttpGet(Name = "tuighNumber")]
-        
-
-        //[HttpGet]
-        //public IActionResult PrintId(string id)
-        //{
-
-        //    return Content(currentAccount.PrintAccountInfo(id));
-
-        //}
-        [HttpGet]
-        public IActionResult TuighNumber()
+        [HttpPost]
+        public string Login(string userId, string userPwd)
         {
-            //return Content("string");
-           return Content(currentAccount.GetAccountNumber());
+            return _accountService.Login(userId, userPwd);
         }
 
-        //public IActionResult GETId2()
-        //{
-        //    return Content("");
+        [HttpPost]
+        public string LogOut(string userId)
+        {
+            return _accountService.LogOut(userId);
+        }
 
-
-
-        //}
+        [HttpPost]
+        public void CreateAccounts(int num)
+        {
+            _accountService.TestCreateAccounts(num);
+        }
     }
 }

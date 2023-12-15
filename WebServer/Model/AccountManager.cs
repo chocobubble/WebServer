@@ -13,6 +13,7 @@ namespace WebServer.Model
             _accountList = new List<AccountInfo>();
         }
 
+        //////// account ////////
         public bool AddAccount(string userName, string userPassword)
         {
             if (_accountTable.ContainsKey(userName))
@@ -43,7 +44,6 @@ namespace WebServer.Model
                 _logInUserName = userName;
                 return "로그인 되었습니다.";
             }
-
         }
 
         public string LogOut()
@@ -52,6 +52,21 @@ namespace WebServer.Model
             return "로그아웃 되었습니다.";
         }
 
+        public string PrintLoginUserInfo()
+        {
+            if (_logInUserName == "")
+            {
+                return "로그인을 먼저 해야 함 ";
+            }
+
+            return _accountTable[_logInUserName].PrintAccountInfo();
+
+        }
+
+        ////////////////////////
+
+
+        //////// 점수 ////////
         public bool SetScore(string userName, int score)
         {
             if (!_accountTable.ContainsKey(userName))
@@ -68,6 +83,7 @@ namespace WebServer.Model
 
         public int GetUserRank(string id)
         {
+            _accountList.Sort();
             for (int idx = 0; idx < _accountList.Count; idx++)
             {
                 if (_accountList[idx].PlayerId == id)
@@ -77,6 +93,7 @@ namespace WebServer.Model
             }
             return -1;
         }
+
 
         public string GetLoginUserRank()
         {
@@ -107,19 +124,74 @@ namespace WebServer.Model
             _accountList.Sort();
             for (int idx = 0; idx < _accountList.Count; idx++)
             {
-                print += $"{idx+1}등 유저의 아이디는 {_accountList[idx].PlayerId}이고, 점수는 {_accountList[idx].Score} 입니다.\n"; 
+                print += $"{idx + 1}등 유저의 아이디는 {_accountList[idx].PlayerId}이고, 점수는 {_accountList[idx].Score} 입니다.\n";
             }
             return print;
         }
+        ////////////////////////
 
+        //////// 골드 ////////
+        public bool SetGold(string userName, int gold)
+        {
+            if (!_accountTable.ContainsKey(userName))
+            {
+                return false;
+            }
+            else
+            {
+                AccountInfo tempAccount = _accountTable[userName];
+                tempAccount.Gold = gold;
+                return true;
+            }
+        }
+
+        public bool SetLogInUserGold(int gold)
+        {
+            if (_logInUserName == "")
+            {
+                return false;
+            }
+            else
+            {
+                _accountTable[_logInUserName].Gold = gold;
+                return true;
+            }
+        }
+
+        public int GetLoginUserGold()
+        {
+            int gold = -1;
+            if (_logInUserName == "")
+            {
+                return gold;
+            }
+            gold = _accountTable[_logInUserName].Gold;
+            return gold;
+        }
+
+        public bool LoginUserGetItem(Item item)
+        {
+            if (_logInUserName == "")
+            {
+                return false;
+            }
+
+            _accountTable[_logInUserName].Items.Add(item);
+            return true;
+        }
+
+
+        //////// TEST ////////
         public void CreateAccounts(int num)
         {
-            for (int i = 0;  i < num; i++) 
+            for (int i = 0; i < num; i++)
             {
                 AddAccount(i.ToString(), i.ToString());
                 SetScore(i.ToString(), 500 - i);
+                SetGold(i.ToString(), 2000);
             }
         }
+        ////////////////////////
 
         private Dictionary<string, AccountInfo> _accountTable;
 
@@ -136,7 +208,22 @@ namespace WebServer.Model
         {
             PlayerId = playerId;
             UserPassword = userPassword;
+            Items = new List<Item>();
         }
+
+        public string PrintAccountInfo()
+        {
+            string res = "";
+            res += $"id : {PlayerId}, Score : {Score}, Gold : {Gold}\n";
+            res += "보유중인 아이템\n";
+            foreach (Item item in Items)
+            {
+                res += item.ShowInfo();
+            }
+            return res;
+
+        }
+
 
         public int CompareTo(AccountInfo other)
         {
@@ -147,5 +234,10 @@ namespace WebServer.Model
         public string PlayerId { get; set; }
         public string UserPassword { get; set; }
         public int Score { get; set; }
+        public int Gold { get; set; }
+        public int Level { get; set; }
+        public int Exp { get; set; }
+        public int Ammo { get; set; }
+        public List<Item> Items { get; set; }
     }
 }

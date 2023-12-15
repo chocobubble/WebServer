@@ -1,10 +1,11 @@
+using System.Reflection.Metadata;
 using Microsoft.AspNetCore.Mvc;
 using WebServer.Model;
 
-// ·©Å· ÄÁÆ®·Ñ·¯¸¦ ¸¸µé°í
-// ·©Å·À» ÀúÀåÇÏ´Â ±â´É
-// ÀüÃ¼ ·©Å·À» ºÒ·¯¿À´Â ±â´É (1~100µî±îÁö)
-// ³ªÀÇ ·©Å·À» ºÒ·¯¿À´Â ±â´É (1~100µî±îÁö)
+// ï¿½ï¿½Å· ï¿½ï¿½Æ®ï¿½Ñ·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½
+// ï¿½ï¿½Å·ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½
+// ï¿½ï¿½Ã¼ ï¿½ï¿½Å·ï¿½ï¿½ ï¿½Ò·ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ (1~100ï¿½ï¿½ï¿½ï¿½ï¿½)
+// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å·ï¿½ï¿½ ï¿½Ò·ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ (1~100ï¿½ï¿½ï¿½ï¿½ï¿½)
 
 namespace WebServer.Controllers
 { 
@@ -13,70 +14,31 @@ namespace WebServer.Controllers
     public class RankingController : ControllerBase
     {
 
-        static private AccountManager _accountManager = new AccountManager();
-
         private readonly ILogger<RankingController> _logger;
 
         public RankingController(ILogger<RankingController> logger)
         {
             _logger = logger;
         }
-
-        [HttpPost]
-        public string CreateID(string id, string pwd)
-        {
-            if (id != "" && _accountManager.AddAccount(id, pwd))
-            {
-                return "°èÁ¤ »ý¼º¿¡ ¼º°øÇß½À´Ï´Ù.";
-            }
-            else
-            {
-                return "°èÁ¤ »ý¼º¿¡ ½ÇÆÐÇß½À´Ï´Ù.";
-            }
-        }
-
-        [HttpPost]
-        public string Login(string id, string pwd)
-        {
-            return _accountManager.Login(id, pwd);
-        }
-
-        [HttpPost]
-        public string LogOut()
-        {
-            return _accountManager.LogOut();
-        }
-
-        [HttpPost]
-        public string SetScore(string id, int score)
-        {
-            if (_accountManager.SetScore(id, score))
-            {
-                return "½ºÄÚ¾î ¼³Á¤¿¡ ¼º°øÇß½À´Ï´Ù.";
-            }
-            else
-            {
-                return "ÇØ´ç id°¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.";
-            }
-        }
-
+        /*
         [HttpGet]
         public string GetMyRank()
         {
-            return _accountManager.GetLoginUserRank();
+            return AccountController.accountManagerInstance.GetLoginUserRank();
+        }
+
+        [HttpGet]
+        public string PrintMyInfo()
+        {
+            return AccountController.accountManagerInstance.PrintLoginUserInfo();
         }
 
         [HttpGet]
         public string PrintAllScorer()
         {
-            return _accountManager.PrintAllScorer();
+            return AccountController.accountManagerInstance.PrintAllScorer();
         }
-
-        [HttpPost]
-        public void CreateAccounts(int num)
-        {
-            _accountManager.CreateAccounts(num);
-        }
+        */
     }
 }
 
