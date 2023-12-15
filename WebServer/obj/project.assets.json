@@ -1404,11 +1404,16 @@
     ]
   },
   "packageFolders": {
+<<<<<<< HEAD
     "C:\\Users\\user\\.nuget\\packages\\": {}
+=======
+    "C:\\Users\\M\\.nuget\\packages\\": {}
+>>>>>>> fea2b884bb4c90dec351ca57d72376bcccfdde28
   },
   "project": {
     "version": "1.0.0",
     "restore": {
+<<<<<<< HEAD
       "projectUniqueName": "D:\\m\\WebServer\\WebServer\\WebServer.csproj",
       "projectName": "WebServer",
       "projectPath": "D:\\m\\WebServer\\WebServer\\WebServer.csproj",
@@ -1417,6 +1422,16 @@
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
+=======
+      "projectUniqueName": "C:\\Users\\M\\Desktop\\GitHub\\WebServer\\WebServer\\WebServer.csproj",
+      "projectName": "WebServer",
+      "projectPath": "C:\\Users\\M\\Desktop\\GitHub\\WebServer\\WebServer\\WebServer.csproj",
+      "packagesPath": "C:\\Users\\M\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\M\\Desktop\\GitHub\\WebServer\\WebServer\\obj\\",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "C:\\Users\\M\\AppData\\Roaming\\NuGet\\NuGet.Config",
+>>>>>>> fea2b884bb4c90dec351ca57d72376bcccfdde28
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

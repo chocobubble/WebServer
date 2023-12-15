@@ -30,12 +30,9 @@ namespace WebServer.Controllers
         }
 
         [HttpGet]
-        public string LoadCharacterData()
+        public byte[] LoadCharacterData()
         {
-            string res = "";
-            res += _loadService.LoadData();
-            res += "캐릭터 데이터 불러오기에 성공했습니다\n";
-            return res;
+            return _loadService.GetBytes();
         }
     }
 }

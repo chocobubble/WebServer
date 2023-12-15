@@ -31,15 +31,17 @@ namespace WebServer.Protos
                   "CghteS5wcm90byKJAQoNQ2hhcmFjdGVyRGF0YRINCgVsZXZlbBgBIAEoBRIL",
                   "CgNleHAYAiABKAUSEgoKcGxheWVyTmFtZRgDIAEoCRIMCgRnb2xkGAQgASgF",
                   "EicKDndlYXBvblNhdmVEYXRhGAUgASgLMg8uV2VhcG9uU2F2ZURhdGESEQoJ",
-                  "cmlmbGVBbW1vGAYgASgFIoEBCg5XZWFwb25TYXZlRGF0YRISCgp3ZXBvbkxl",
-                  "dmVsGAEgASgFEh0KFXdlcG9uRW5oYW5jZW1lbnRMZXZlbBgCIAEoBSI8CgpX",
-                  "ZWFwb25UeXBlEg0KCUVXVF9SSUZMRRAAEg4KCkVXVF9QSVNUT0wQARIPCgtF",
-                  "V1RfU0hPVEdVThACQhOqAhBXZWJTZXJ2ZXIuUHJvdG9zYgZwcm90bzM="));
+                  "cmlmbGVBbW1vGAYgASgFIrMBCg5XZWFwb25TYXZlRGF0YRITCgt3ZWFwb25M",
+                  "ZXZlbBgBIAEoBRIeChZ3ZWFwb25FbmhhbmNlbWVudExldmVsGAIgASgFEi4K",
+                  "CndlYXBvblR5cGUYAyABKA4yGi5XZWFwb25TYXZlRGF0YS5XZWFwb25UeXBl",
+                  "IjwKCldlYXBvblR5cGUSDQoJRVdUX1JJRkxFEAASDgoKRVdUX1BJU1RPTBAB",
+                  "Eg8KC0VXVF9TSE9UR1VOEAJCE6oCEFdlYlNlcnZlci5Qcm90b3NiBnByb3Rv",
+                  "Mw=="));
             descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
                 new pbr::FileDescriptor[] { },
                 new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::WebServer.Protos.CharacterData), global::WebServer.Protos.CharacterData.Parser, new[]{ "Level", "Exp", "PlayerName", "Gold", "WeaponSaveData", "RifleAmmo" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::WebServer.Protos.WeaponSaveData), global::WebServer.Protos.WeaponSaveData.Parser, new[]{ "WeponLevel", "WeponEnhancementLevel" }, null, new[]{ typeof(global::WebServer.Protos.WeaponSaveData.Types.WeaponType) }, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::WebServer.Protos.WeaponSaveData), global::WebServer.Protos.WeaponSaveData.Parser, new[]{ "WeaponLevel", "WeaponEnhancementLevel", "WeaponType" }, null, new[]{ typeof(global::WebServer.Protos.WeaponSaveData.Types.WeaponType) }, null, null)
                 }));
         }
         #endregion
@@ -528,8 +530,9 @@ namespace WebServer.Protos
         [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
         public WeaponSaveData(WeaponSaveData other) : this()
         {
-            weponLevel_ = other.weponLevel_;
-            weponEnhancementLevel_ = other.weponEnhancementLevel_;
+            weaponLevel_ = other.weaponLevel_;
+            weaponEnhancementLevel_ = other.weaponEnhancementLevel_;
+            weaponType_ = other.weaponType_;
             _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
         }
 
@@ -540,31 +543,45 @@ namespace WebServer.Protos
             return new WeaponSaveData(this);
         }
 
-        /// <summary>Field number for the "weponLevel" field.</summary>
-        public const int WeponLevelFieldNumber = 1;
-        private int weponLevel_;
+        /// <summary>Field number for the "weaponLevel" field.</summary>
+        public const int WeaponLevelFieldNumber = 1;
+        private int weaponLevel_;
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-        public int WeponLevel
+        public int WeaponLevel
         {
-            get { return weponLevel_; }
+            get { return weaponLevel_; }
             set
             {
-                weponLevel_ = value;
+                weaponLevel_ = value;
             }
         }
 
-        /// <summary>Field number for the "weponEnhancementLevel" field.</summary>
-        public const int WeponEnhancementLevelFieldNumber = 2;
-        private int weponEnhancementLevel_;
+        /// <summary>Field number for the "weaponEnhancementLevel" field.</summary>
+        public const int WeaponEnhancementLevelFieldNumber = 2;
+        private int weaponEnhancementLevel_;
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-        public int WeponEnhancementLevel
+        public int WeaponEnhancementLevel
         {
-            get { return weponEnhancementLevel_; }
+            get { return weaponEnhancementLevel_; }
             set
             {
-                weponEnhancementLevel_ = value;
+                weaponEnhancementLevel_ = value;
+            }
+        }
+
+        /// <summary>Field number for the "weaponType" field.</summary>
+        public const int WeaponTypeFieldNumber = 3;
+        private global::WebServer.Protos.WeaponSaveData.Types.WeaponType weaponType_ = global::WebServer.Protos.WeaponSaveData.Types.WeaponType.EwtRifle;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+        public global::WebServer.Protos.WeaponSaveData.Types.WeaponType WeaponType
+        {
+            get { return weaponType_; }
+            set
+            {
+                weaponType_ = value;
             }
         }
 
@@ -587,8 +604,9 @@ namespace WebServer.Protos
             {
                 return true;
             }
-            if (WeponLevel != other.WeponLevel) return false;
-            if (WeponEnhancementLevel != other.WeponEnhancementLevel) return false;
+            if (WeaponLevel != other.WeaponLevel) return false;
+            if (WeaponEnhancementLevel != other.WeaponEnhancementLevel) return false;
+            if (WeaponType != other.WeaponType) return false;
             return Equals(_unknownFields, other._unknownFields);
         }
 
@@ -597,8 +615,9 @@ namespace WebServer.Protos
         public override int GetHashCode()
         {
             int hash = 1;
-            if (WeponLevel != 0) hash ^= WeponLevel.GetHashCode();
-            if (WeponEnhancementLevel != 0) hash ^= WeponEnhancementLevel.GetHashCode();
+            if (WeaponLevel != 0) hash ^= WeaponLevel.GetHashCode();
+            if (WeaponEnhancementLevel != 0) hash ^= WeaponEnhancementLevel.GetHashCode();
+            if (WeaponType != global::WebServer.Protos.WeaponSaveData.Types.WeaponType.EwtRifle) hash ^= WeaponType.GetHashCode();
             if (_unknownFields != null)
             {
                 hash ^= _unknownFields.GetHashCode();
@@ -620,13 +639,17 @@ namespace WebServer.Protos
 #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
             output.WriteRawMessage(this);
 #else
-      if (WeponLevel != 0) {
+      if (WeaponLevel != 0) {
         output.WriteRawTag(8);
-        output.WriteInt32(WeponLevel);
+        output.WriteInt32(WeaponLevel);
       }
-      if (WeponEnhancementLevel != 0) {
+      if (WeaponEnhancementLevel != 0) {
         output.WriteRawTag(16);
-        output.WriteInt32(WeponEnhancementLevel);
+        output.WriteInt32(WeaponEnhancementLevel);
+      }
+      if (WeaponType != global::WebServer.Protos.WeaponSaveData.Types.WeaponType.EwtRifle) {
+        output.WriteRawTag(24);
+        output.WriteEnum((int) WeaponType);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -639,15 +662,20 @@ namespace WebServer.Protos
         [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
         void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output)
         {
-            if (WeponLevel != 0)
+            if (WeaponLevel != 0)
             {
                 output.WriteRawTag(8);
-                output.WriteInt32(WeponLevel);
+                output.WriteInt32(WeaponLevel);
             }
-            if (WeponEnhancementLevel != 0)
+            if (WeaponEnhancementLevel != 0)
             {
                 output.WriteRawTag(16);
-                output.WriteInt32(WeponEnhancementLevel);
+                output.WriteInt32(WeaponEnhancementLevel);
+            }
+            if (WeaponType != global::WebServer.Protos.WeaponSaveData.Types.WeaponType.EwtRifle)
+            {
+                output.WriteRawTag(24);
+                output.WriteEnum((int)WeaponType);
             }
             if (_unknownFields != null)
             {
@@ -661,13 +689,17 @@ namespace WebServer.Protos
         public int CalculateSize()
         {
             int size = 0;
-            if (WeponLevel != 0)
+            if (WeaponLevel != 0)
             {
-                size += 1 + pb::CodedOutputStream.ComputeInt32Size(WeponLevel);
+                size += 1 + pb::CodedOutputStream.ComputeInt32Size(WeaponLevel);
             }
-            if (WeponEnhancementLevel != 0)
+            if (WeaponEnhancementLevel != 0)
             {
-                size += 1 + pb::CodedOutputStream.ComputeInt32Size(WeponEnhancementLevel);
+                size += 1 + pb::CodedOutputStream.ComputeInt32Size(WeaponEnhancementLevel);
+            }
+            if (WeaponType != global::WebServer.Protos.WeaponSaveData.Types.WeaponType.EwtRifle)
+            {
+                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int)WeaponType);
             }
             if (_unknownFields != null)
             {
@@ -684,13 +716,17 @@ namespace WebServer.Protos
             {
                 return;
             }
-            if (other.WeponLevel != 0)
+            if (other.WeaponLevel != 0)
             {
-                WeponLevel = other.WeponLevel;
+                WeaponLevel = other.WeaponLevel;
             }
-            if (other.WeponEnhancementLevel != 0)
+            if (other.WeaponEnhancementLevel != 0)
             {
-                WeponEnhancementLevel = other.WeponEnhancementLevel;
+                WeaponEnhancementLevel = other.WeaponEnhancementLevel;
+            }
+            if (other.WeaponType != global::WebServer.Protos.WeaponSaveData.Types.WeaponType.EwtRifle)
+            {
+                WeaponType = other.WeaponType;
             }
             _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
         }
@@ -709,11 +745,15 @@ namespace WebServer.Protos
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 8: {
-            WeponLevel = input.ReadInt32();
+            WeaponLevel = input.ReadInt32();
             break;
           }
           case 16: {
-            WeponEnhancementLevel = input.ReadInt32();
+            WeaponEnhancementLevel = input.ReadInt32();
+            break;
+          }
+          case 24: {
+            WeaponType = (global::WebServer.Protos.WeaponSaveData.Types.WeaponType) input.ReadEnum();
             break;
           }
         }
@@ -736,12 +776,17 @@ namespace WebServer.Protos
                         break;
                     case 8:
                         {
-                            WeponLevel = input.ReadInt32();
+                            WeaponLevel = input.ReadInt32();
                             break;
                         }
                     case 16:
                         {
-                            WeponEnhancementLevel = input.ReadInt32();
+                            WeaponEnhancementLevel = input.ReadInt32();
+                            break;
+                        }
+                    case 24:
+                        {
+                            WeaponType = (global::WebServer.Protos.WeaponSaveData.Types.WeaponType)input.ReadEnum();
                             break;
                         }
                 }

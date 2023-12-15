@@ -1,5 +1,18 @@
+<<<<<<< HEAD
 .vs
 .vs/
 .vs/*
 WebServer/obj/
+=======
+# Visual Studio 2015 user specific files
+.vs/
+.vscode/
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+>>>>>>> fea2b884bb4c90dec351ca57d72376bcccfdde28
 WebServer/obj/*

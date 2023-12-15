@@ -21,6 +21,7 @@ message WeaponSaveData
 		EWT_SHOTGUN = 2;
 	}
 
-	int32 weponLevel = 1;
-	int32 weponEnhancementLevel = 2;
+	int32 weaponLevel = 1;
+	int32 weaponEnhancementLevel = 2;
+	WeaponType weaponType = 3;
 }

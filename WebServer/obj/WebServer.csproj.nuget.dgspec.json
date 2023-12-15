@@ -1,6 +1,7 @@
 {
   "format": 1,
   "restore": {
+<<<<<<< HEAD
     "D:\\m\\WebServer\\WebServer\\WebServer.csproj": {}
   },
   "projects": {
@@ -15,6 +16,22 @@
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
+=======
+    "C:\\Users\\M\\Desktop\\GitHub\\WebServer\\WebServer\\WebServer.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\M\\Desktop\\GitHub\\WebServer\\WebServer\\WebServer.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\M\\Desktop\\GitHub\\WebServer\\WebServer\\WebServer.csproj",
+        "projectName": "WebServer",
+        "projectPath": "C:\\Users\\M\\Desktop\\GitHub\\WebServer\\WebServer\\WebServer.csproj",
+        "packagesPath": "C:\\Users\\M\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\M\\Desktop\\GitHub\\WebServer\\WebServer\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\M\\AppData\\Roaming\\NuGet\\NuGet.Config",
+>>>>>>> fea2b884bb4c90dec351ca57d72376bcccfdde28
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
