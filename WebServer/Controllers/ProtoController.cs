@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Google.Protobuf;
 using Microsoft.AspNetCore.Mvc;
+using WebServer.Model;
 using WebServer.Protos;
 using WebServer.Repository.Interface;
 using WebServer.Service;
@@ -156,6 +157,48 @@ namespace WebServer.Controllers
             ByteString byteString = characterData.ToByteString();
             return byteString;
         }
+
+        
+        [HttpGet]
+        public IActionResult ProtoTest6()
+        {
+            UserSession userSession =  new UserSession() { SessionId = Guid.NewGuid().ToString(), UserId = "Moon", ExpireTime = DateTime.Now, State = "state"};
+            return Ok(userSession);
+        }
+
+        [HttpGet]
+        public ProtoTest ProtoTest7()
+        {
+            ProtoTest protoTest = new ProtoTest
+            {
+                Num = 1
+            };
+            byte[] bytes = protoTest.ToByteArray();
+            return protoTest;
+        }
+
+        [HttpGet]
+        public IActionResult ProtoTest8()
+        {
+            ProtobufModelDto protobufModelDto =  new ProtobufModelDto() { Id = 1, Name = "moon", StringValue = "str" };
+            return Ok(protobufModelDto);
+        }
+
+        [HttpGet]
+        public IActionResult ProtoTest9()
+        {
+            CharacterData2 characterData = new CharacterData2
+            {
+                Level = 3,
+                Exp = 5,
+                PlayerName = "player",
+                Gold = 100,
+                weaponSaveData = new WeaponSaveData2 { WeaponLevel = 2, WeaponEnhancementLevel = 3, weaponType = WeaponType.EWT_RIFLE },
+                RifleAmmo = 1000
+            };
+            return Ok(characterData);
+        }
+
     }
 }
 

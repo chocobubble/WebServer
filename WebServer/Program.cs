@@ -2,12 +2,31 @@ using WebServer.Service.Interface;
 using WebServer.Service;
 using WebServer.Repository.Interface;
 using WebServer.Repository;
+using Microsoft.Net.Http.Headers;
+using ProtobufFormatter.Formatters;
+using CustomFormattersSample.Formatters;
+using ProtoBuf.Meta;
 
 var builder = WebApplication.CreateBuilder(args);
+// protobuf
+/*
+builder.Services.AddControllers(options =>
+{
+    //options.InputFormatters.Insert(0, new SessionProtobufInputFormatter());
+    options.OutputFormatters.Insert(0, new SessionProtobufOutputFormatter());
+   // options.FormatterMappings.SetMediaTypeMappingForFormat("protobuf", MediaTypeHeaderValue.Parse("application/x-protobuf"));
+});*/
+builder.Services.AddControllers(options =>
+{
+    options.OutputFormatters.Insert(0, new SessionProtobufOutputFormatter());
 
+    options.FormatterMappings
+        .SetMediaTypeMappingForFormat("protobuf",
+          MediaTypeHeaderValue.Parse("application/x-protobuf"));
+});
 // Add services to the container.
 
-builder.Services.AddControllers();
+//builder.Services.AddControllers();
 builder.Services.AddSingleton<IAccountService, AccountService>();
 builder.Services.AddSingleton<IAccountRepository, AccountRepository>();
 builder.Services.AddSingleton<ICharacterDataRepository, CharacterDataRepository>();
@@ -17,6 +36,8 @@ builder.Services.AddSwaggerGen();
 
 // gRPC
 builder.Services.AddGrpc();
+
+
 
 var app = builder.Build();
 

@@ -20,6 +20,7 @@
     </PackageReference>
     <PackageReference Include="Grpc" Version="2.46.6" />
     <PackageReference Include="Google.Protobuf.Tools" Version="3.25.1" />
+    <PackageReference Include="protobuf-net" Version="3.2.30" />
   </ItemGroup>
 
   <ItemGroup>
@@ -29,6 +30,8 @@
     <None Remove="Repository\Interface\" />
     <None Remove="Protos\" />
     <None Remove="Protos\greet.proto" />
+    <None Remove="HttpCommand\" />
+    <None Remove="Formatter\" />
   </ItemGroup>
   <ItemGroup>
     <Protobuf Include="Protos\greet.proto" GrpcServices="">
@@ -38,5 +41,9 @@
       <OutputDir></OutputDir>
       <Generator></Generator>
     </Protobuf>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="HttpCommand\" />
+    <Folder Include="Formatter\" />
   </ItemGroup>
 </Project>
