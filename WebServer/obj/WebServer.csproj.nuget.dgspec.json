@@ -1,26 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "/Users/m/WebServer/WebServer/WebServer.csproj": {}
+    "C:\\Users\\M\\Desktop\\GitHub\\WebServer\\WebServer\\WebServer.csproj": {}
   },
   "projects": {
-    "/Users/m/WebServer/WebServer/WebServer.csproj": {
+    "C:\\Users\\M\\Desktop\\GitHub\\WebServer\\WebServer\\WebServer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/m/WebServer/WebServer/WebServer.csproj",
+        "projectUniqueName": "C:\\Users\\M\\Desktop\\GitHub\\WebServer\\WebServer\\WebServer.csproj",
         "projectName": "WebServer",
-        "projectPath": "/Users/m/WebServer/WebServer/WebServer.csproj",
-        "packagesPath": "/Users/m/.nuget/packages/",
-        "outputPath": "/Users/m/WebServer/WebServer/obj/",
+        "projectPath": "C:\\Users\\M\\Desktop\\GitHub\\WebServer\\WebServer\\WebServer.csproj",
+        "packagesPath": "C:\\Users\\M\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\M\\Desktop\\GitHub\\WebServer\\WebServer\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/m/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\M\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
         ],
         "sources": {
-          "/usr/local/share/dotnet/sdk/7.0.311/Sdks/Microsoft.NET.Sdk.Web/library-packs": {},
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -93,7 +94,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.311/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }
