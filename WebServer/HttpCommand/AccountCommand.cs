@@ -17,5 +17,16 @@ namespace WebServer.HttpCommand
         [ProtoMember(2)]
         public string SessionId { get; set; }
     }
+
+    [ProtoContract]
+    public class LoginRequest2
+    {
+        [ProtoMember(1)]
+        public string sessionId { get; set; }
+        [ProtoMember(2)]
+        public string Id { get; set; }
+        [ProtoMember(3)]
+        public string Password { get; set; }
+    }
 }
 

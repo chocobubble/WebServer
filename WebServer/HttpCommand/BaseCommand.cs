@@ -13,16 +13,21 @@ namespace WebServer.HttpCommand
 	public class BaseResponse
 	{
 		[ProtoMember(1)]
-        public ApiReturnCode ApiReturnCode { get; set; }
+        public ApiReturnCode apiReturnCode { get; set; }
     }
 
     [ProtoContract]
     public enum ApiReturnCode
     {
+        None = 0,
 		[ProtoMember(1)]
         Success = 1,
 		[ProtoMember(2)]
         UnknownSessionId = 2,
+        [ProtoMember(3)]
+        InvalidUserId = 3,
+        [ProtoMember(4)]
+        InvalidUserPassword = 4,
     }
 }
 

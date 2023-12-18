@@ -7,39 +7,45 @@ using ProtoBuf;
 
 namespace WebServer.Model
 {
+    [ProtoContract]
     public enum WeaponType
     {
-        EWT_RIFLE = 0,
-        EWT_PISTOL = 1,
-        EWT_SHOTGUN = 2
+        [ProtoEnum]
+        EWT_DEFAULT = 0,
+        [ProtoEnum]
+        EWT_RIFLE = 1,
+        [ProtoEnum]
+        EWT_PISTOL = 2,
+        [ProtoEnum]
+        EWT_SHOTGUN = 3
     }
 
     [ProtoContract]
-    public class CharacterData2
+    public class CharacterSaveData
     {
         [ProtoMember(1)]
-        public Int32 Level { get; set; }
+        public int level { get; set; }
         [ProtoMember(2)]
-        public Int32 Exp { get; set; }
+        public int exp { get; set; }
         [ProtoMember(3)]
-        public string PlayerName { get; set; }
+        public string playerName { get; set; }
         [ProtoMember(4)]
-        public Int32 Gold { get; set; }
+        public int gold { get; set; }
         [ProtoMember(5)]
-        public WeaponSaveData2 weaponSaveData { get; set; }
+        public WeaponData weaponData { get; set; }
         [ProtoMember(6)]
-        public Int32 RifleAmmo { get; set; }
+        public int rifleAmmo { get; set; }
     }
 
     [ProtoContract]
-    public class WeaponSaveData2
+    public class WeaponData
     {
         [ProtoMember(1)]
         public WeaponType weaponType { get; set; }
         [ProtoMember(2)]
-        public Int32 WeaponLevel { get; set; }
+        public int weaponLevel { get; set; }
         [ProtoMember(3)]
-        public Int32 WeaponEnhancementLevel { get; set; }
+        public int weaponEnhancementLevel { get; set; }
     }
 }
 

@@ -139,27 +139,27 @@ namespace WebServer.Controllers
             return Ok(protobufModelDto);
         }
 
-        [HttpGet]
-        public IActionResult ProtoTest9()
-        {
-            CharacterData2 characterData = new CharacterData2
-            {
-                Level = 3,
-                Exp = 5,
-                PlayerName = "player",
-                Gold = 100,
-                weaponSaveData = new WeaponSaveData2 { WeaponLevel = 2, WeaponEnhancementLevel = 3, weaponType = WeaponType.EWT_RIFLE },
-                RifleAmmo = 1000
-            };
-            return Ok(characterData);
-        }
+        //[HttpGet]
+        //public IActionResult ProtoTest9()
+        //{
+        //    CharacterData2 characterData = new CharacterData2
+        //    {
+        //        Level = 3,
+        //        Exp = 5,
+        //        PlayerName = "player",
+        //        Gold = 100,
+        //        weaponSaveData = new WeaponSaveData2 { WeaponLevel = 2, WeaponEnhancementLevel = 3, weaponType = WeaponType.EWT_RIFLE },
+        //        RifleAmmo = 1000
+        //    };
+        //    return Ok(characterData);
+        //}
 
-        [HttpPost]
-        public String ProtoTest10([FromBody]CharacterData2 characterData)
-        {
-            var data = characterData;
-            return data.PlayerName;
-        }
+        //[HttpPost]
+        //public String ProtoTest10([FromBody]CharacterData2 characterData)
+        //{
+        //    var data = characterData;
+        //    return data.PlayerName;
+        //}
 
         [HttpPost]
         public String ProtoTest11(byte[] bytes)
@@ -173,7 +173,7 @@ namespace WebServer.Controllers
         public LoginResponse LoginResponseTest()
         {
             LoginResponse loginResponse = new LoginResponse();
-            loginResponse.ApiReturnCode = ApiReturnCode.Success;
+            loginResponse.apiReturnCode = ApiReturnCode.Success;
             loginResponse.SessionId = "session Id";
             return loginResponse;
         }

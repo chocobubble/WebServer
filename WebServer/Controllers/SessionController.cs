@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using WebServer.HttpCommand;
 using WebServer.Model;
 using WebServer.Service;
 using WebServer.Service.Interface;
@@ -21,18 +22,47 @@ namespace WebServer.Controllers
         }
 
         [HttpPost]
-        public string Login(string userId, string userPwd)
+        public LoginResponse Login(LoginRequest2 loginRequest)
         {
+            string userId = loginRequest.Id;
+            string userPwd = loginRequest.Password;
+            LoginResponse loginResponse = new LoginResponse();
             if (!_accountService.IsValidId(userId))
             {
-                return "Invalid_Id";
+                loginResponse.apiReturnCode = ApiReturnCode.InvalidUserId;
             }
             else if (!_accountService.IsValidPassword(userId, userPwd))
             {
-                return "Invalid_Pwd";
+                loginResponse.apiReturnCode = ApiReturnCode.InvalidUserPassword;
             }
+            else
+            {
+                loginResponse.apiReturnCode = ApiReturnCode.Success;
+                loginResponse.SessionId = _sessionService.CreateSessionId(userId);
+            }
+            return loginResponse;
+        }
 
-            return _sessionService.CreateSessionId(userId);
+        [HttpPost]
+        public LoginResponse Login2(LoginRequest loginRequest)
+        {
+            string userId = loginRequest.Id;
+            string userPwd = loginRequest.Password;
+            LoginResponse loginResponse = new LoginResponse();
+            if (!_accountService.IsValidId(userId))
+            {
+                loginResponse.apiReturnCode = ApiReturnCode.InvalidUserId;
+            }
+            else if (!_accountService.IsValidPassword(userId, userPwd))
+            {
+                loginResponse.apiReturnCode = ApiReturnCode.InvalidUserPassword;
+            }
+            else
+            {
+                loginResponse.apiReturnCode = ApiReturnCode.Success;
+                loginResponse.SessionId = _sessionService.CreateSessionId(userId);
+            }
+            return loginResponse;
         }
 
         [HttpPost]
