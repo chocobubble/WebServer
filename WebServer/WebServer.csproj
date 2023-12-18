@@ -21,6 +21,7 @@
     <PackageReference Include="Grpc" Version="2.46.6" />
     <PackageReference Include="Google.Protobuf.Tools" Version="3.25.1" />
     <PackageReference Include="protobuf-net" Version="3.2.30" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -32,6 +33,8 @@
     <None Remove="Protos\greet.proto" />
     <None Remove="HttpCommand\" />
     <None Remove="Formatter\" />
+    <None Remove="tests\" />
+    <None Remove="Protos\Check\" />
   </ItemGroup>
   <ItemGroup>
     <Protobuf Include="Protos\greet.proto" GrpcServices="">
@@ -45,5 +48,7 @@
   <ItemGroup>
     <Folder Include="HttpCommand\" />
     <Folder Include="Formatter\" />
+    <Folder Include="tests\" />
+    <Folder Include="Protos\Check\" />
   </ItemGroup>
 </Project>

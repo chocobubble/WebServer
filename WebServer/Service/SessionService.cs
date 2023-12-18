@@ -22,12 +22,16 @@ namespace WebServer.Service
         // 세션을 사용하면 동접 지표를 대략적으로 알 수 있음
         public string CreateSessionId(string userId)
         {
-            if (_UserIdToSessionId.TryGetValue(userId, out _))
+            if (_UserIdToSessionId.TryGetValue(userId, out UserSession loginUserSession))
             {
                 // 어? 너 이미 로그인한 상태인데?
                 // 중복 로그인 처리
                 // 이전의 세션 상태를 중복 로그인으로 변경
+                loginUserSession.State = StateType.Duplicated;
+
             }
+
+            // 새로운 세션 생성
             UserSession userSession = new UserSession();
             userSession.SessionId = Guid.NewGuid().ToString();
             userSession.UserId = userId;
@@ -36,6 +40,18 @@ namespace WebServer.Service
             _sessionIdToUserSession.Add(userSession.SessionId, userSession);
             _UserIdToSessionId.Add(userId, userSession);
             return userSession.SessionId;
+        }
+
+        public bool IsValidSession(string sessionId)
+        {
+            if (_sessionIdToUserSession.TryGetValue(sessionId, out UserSession userSession))
+            {
+                if (userSession.State == StateType.Valid)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         public bool IsValidSessionId(string sessionId)
@@ -57,8 +73,10 @@ namespace WebServer.Service
             return true;
         }
 
-        public bool KeepAliveSessionId(string sessionId)
+        public bool RefreshSessionId(string sessionId)
         {
+            // 유효 세션 확인
+            // 중복 세션 확인
             if (!_sessionIdToUserSession.TryGetValue(sessionId, out UserSession userSession))
             {
                 return false;
@@ -76,11 +94,12 @@ namespace WebServer.Service
 
         public bool DeleteSessionId(string sessionId)
         {
-            if (!_sessionIdToUserSession.TryGetValue(sessionId, out _))
+            if (!_sessionIdToUserSession.TryGetValue(sessionId, out UserSession userSession))
             {
                 return false;
             }
 
+            _UserIdToSessionId.Remove(userSession.UserId);
             _sessionIdToUserSession.Remove(sessionId);
             return true;
         }

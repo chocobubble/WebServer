@@ -1,6 +1,6 @@
 ﻿using System;
 using ProtoBuf;
-namespace WebServer.HttpCommand
+namespace WebServer.Check
 {
     [ProtoContract]
     public class CreateAccountRequest : BaseRequest

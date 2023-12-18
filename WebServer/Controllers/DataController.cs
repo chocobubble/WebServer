@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using WebServer.HttpCommand;
 using WebServer.Model;
 using WebServer.Repository;
 using WebServer.Repository.Interface;
@@ -12,27 +13,25 @@ namespace WebServer.Controllers
     public class DataController : ControllerBase
     { 
         private readonly ILogger<DataController> _logger;
-        private readonly LoadService _loadService;
-        private readonly SaveService _saveService;
+        private readonly DataService _dataService;
 
-        public DataController(ILogger<DataController> logger, IAccountRepository accountRepository)
+        public DataController(ILogger<DataController> logger, ICharacterDataRepository characterDataRepository)
         {
             _logger = logger;
-            _loadService = new LoadService(accountRepository);
-            _saveService = new SaveService(accountRepository);
+            _dataService = new DataService(characterDataRepository);
         }
 
         [HttpPost]
-        public string SaveCharacterData(string userName, byte[] bytes)
+        public CharacterDataSaveResponse SaveCharacterData(CharacterDataSaveRequest request)
         {
-            _saveService.SaveData(userName, bytes);
+            _dataService.SaveCharacterData(request.sessionId, bytes);
             return "캐릭터 데이터 저장에 성공했습니다";
         }
 
         [HttpGet]
         public byte[] LoadCharacterData(string userId)
         {
-            return _loadService.LoadData(userId);
+            return _dataService.LoadCharacterData(userId);
         }
     }
 }

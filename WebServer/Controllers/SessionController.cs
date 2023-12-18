@@ -66,6 +66,35 @@ namespace WebServer.Controllers
         }
 
         [HttpPost]
+        public RefreshSessionResponse RefreshSession(RefreshSessionRequest refreshSessionRequest)
+        {
+            string requestSessionId = refreshSessionRequest.sessionId;
+
+            RefreshSessionResponse refreshSessionResponse = new RefreshSessionResponse();
+
+            if (_sessionService.IsValidSessionId(requestSessionId))
+            {
+                _sessionService.RefreshSessionId(requestSessionId);
+                // 중복 로그인 확인 
+                if (_sessionService.IsValidSession(requestSessionId))
+                {
+                    refreshSessionResponse.apiReturnCode = ApiReturnCode.Success;
+                }
+                else
+                {
+                    refreshSessionResponse.apiReturnCode = ApiReturnCode.DuplicatedLogin;
+                }
+            }
+            else
+            {
+                refreshSessionResponse.apiReturnCode = ApiReturnCode.InvalidSessionId;
+            }
+
+            return refreshSessionResponse;
+        }
+
+
+        [HttpPost]
         public string LogOut(string sessionId)
         {
             if (!_sessionService.DeleteSessionId(sessionId))

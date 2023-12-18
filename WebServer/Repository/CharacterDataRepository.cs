@@ -1,4 +1,4 @@
-﻿using WebServer.Protos;
+﻿using WebServer.Model;
 using WebServer.Repository.Interface;
 
 
@@ -7,24 +7,35 @@ namespace WebServer.Repository
 
     public class CharacterDataRepository : ICharacterDataRepository
     {
-        public CharacterData _characterData { get; set; }
+        public Dictionary<string, CharacterData> _userIdToCharacterData;
 
         public CharacterDataRepository()
         {
-            _characterData = new CharacterData();
+            _userIdToCharacterData = new Dictionary<string, CharacterData>();
         }
 
-        public void SaveData()
+        public void SaveCharacterData(string userId, CharacterData characterData)
         {
-
+            _userIdToCharacterData[userId] = characterData;
         }
-        public void LoadData()
-        {
 
-        }
-        public CharacterData GetCharacterData()
+        public void AddCharacterData(string userId, CharacterData characterData)
         {
-            return _characterData;
+            _userIdToCharacterData.Add(userId, characterData);
+        }
+
+        public bool HasCharacterData(string userId)
+        {
+            if (_userIdToCharacterData.TryGetValue(userId, out _))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public CharacterData LoadCharacterData(string userId)
+        {
+            return _userIdToCharacterData[userId];
         }
     }
 }

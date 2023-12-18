@@ -3,17 +3,23 @@ using ProtoBuf;
 
 namespace WebServer.Model
 {
-    [ProtoContract]
 	public class UserSession
 	{
-        [ProtoMember(1)]
+        public UserSession()
+        {
+            State = StateType.Valid;
+        }
         public string SessionId { get; set; }
-        [ProtoMember(2)]
         public string UserId { get; set; }
-        [ProtoMember(3)]
         public DateTime ExpireTime { get; set; }
-        [ProtoMember(4)]
-        public string State { get; set; }
+        public StateType State { get; set; }
+    }
+
+    public enum StateType
+    {
+        None = 0,
+        Valid = 1,
+        Duplicated = 2,
     }
 }
 

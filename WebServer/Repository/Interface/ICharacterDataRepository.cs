@@ -1,11 +1,12 @@
-﻿using WebServer.Protos;
+﻿using WebServer.Model;
 
 namespace WebServer.Repository.Interface
 {
     public interface ICharacterDataRepository
     {
-        public void SaveData();
-        public void LoadData();
-        public CharacterData GetCharacterData();
+        public void SaveCharacterData(string userId, CharacterData characterData);
+        public void AddCharacterData(string userId, CharacterData characterData);
+        public bool HasCharacterData(string userId);
+        public CharacterData LoadCharacterData(string userId);
     }
 }

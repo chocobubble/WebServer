@@ -1,7 +1,7 @@
 ﻿using System;
 using ProtoBuf;
 
-namespace WebServer.HttpCommand
+namespace WebServer.Check
 {
     [ProtoContract]
     public class LoginRequest : BaseRequest
@@ -29,27 +29,5 @@ namespace WebServer.HttpCommand
         [ProtoMember(3)]
         public string Password { get; set; }
     }
-
-    [ProtoContract]
-    public class LogoutRequest : BaseRequest
-    {
-    }
-
-    [ProtoContract]
-    public class LogoutResponse : BaseResponse
-    {
-    }
-
-    [ProtoContract]
-    public class RefreshSessionRequest : BaseRequest
-	{
-
-	}
-
-    [ProtoContract]
-    public class RefreshSessionResponse : BaseResponse
-	{
-
-	}
 }
 

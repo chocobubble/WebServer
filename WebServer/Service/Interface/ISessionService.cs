@@ -5,9 +5,11 @@ namespace WebServer.Service.Interface
 	{
         public string CreateSessionId(string userId);
 
+        public bool IsValidSession(string sessionId);
+
         public bool IsValidSessionId(string sessionId);
 
-        public bool KeepAliveSessionId(string sessionId);
+        public bool RefreshSessionId(string sessionId);
 
         public bool DeleteSessionId(string sessionId);
     }

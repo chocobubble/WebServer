@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using WebServer.HttpCommand;
 using WebServer.Model;
 using WebServer.Service.Interface;
 
@@ -18,17 +19,36 @@ namespace WebServer.Controllers
         }
 
         [HttpPost]
+        public CreateAccountResponse CreateAccount(CreateAccountRequest request)
+        {
+            CreateAccountResponse response = new CreateAccountResponse();
+
+            if (_accountService.CreateAccount(request.Id,request.Password))
+            {
+                response.apiReturnCode = ApiReturnCode.Success;
+            }
+            else
+            {
+                response.apiReturnCode = ApiReturnCode.Fail;
+            }
+            return response;
+        }
+
+
+
+        /*
+        [HttpPost]
         public string CreateAccount(string userId, string userPwd)
         {
             return _accountService.CreateAccount(userId, userPwd);
         }
 
-        /*
+        
         [HttpPost]
         public string Login(string userId, string userPwd)
         {
             return _accountService.Login(userId, userPwd);
-        }*/
+        }
 
         [HttpPost]
         public string Login(string userId, string userPwd)
@@ -55,6 +75,6 @@ namespace WebServer.Controllers
         public void CreateAccounts(int num)
         {
             _accountService.TestCreateAccounts(num);
-        }
+        }*/
     }
 }

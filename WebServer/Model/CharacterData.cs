@@ -21,7 +21,7 @@ namespace WebServer.Model
     }
 
     [ProtoContract]
-    public class CharacterSaveData
+    public class CharacterData
     {
         [ProtoMember(1)]
         public int level { get; set; }
