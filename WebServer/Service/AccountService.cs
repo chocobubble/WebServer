@@ -32,22 +32,22 @@ namespace WebServer.Service
             }
         }
 
-        public string Login(string inputId, string inputPwd)
+        public bool IsValidId(string inputId)
         {
             if (!_accountRepository.IsEnrolledAccount(inputId))
             {
-                return "등록되지 않은 계정입니다";
+                return false;
             }
-            else if (!_accountRepository.IsCorrectPassword(inputId, inputPwd))
+            return true;
+        }
+
+        public bool IsValidPassword(string inputId, string inputPwd)
+        {
+            if (!_accountRepository.IsCorrectPassword(inputId, inputPwd))
             {
-                return "비밀번호가 틀렸습니다";
+                return false;
             }
-            else
-            {
-                _loginUsers.Add(inputId);
-                return "로그인에 성공했습니다";
-            }
-            
+            return true;
         }
 
         public string LogOut(string inputId)

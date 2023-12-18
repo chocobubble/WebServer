@@ -8,6 +8,8 @@ namespace WebServer.Service.Interface
         public bool IsValidSessionId(string sessionId);
 
         public bool KeepAliveSessionId(string sessionId);
+
+        public bool DeleteSessionId(string sessionId);
     }
 }
 

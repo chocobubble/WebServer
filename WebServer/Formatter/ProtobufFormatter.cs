@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Net.Mime;
 using System.Text;
 using System.Threading.Tasks;
-using CustomFormattersSample.Models;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Net.Http.Headers;
 using ProtoBuf;
@@ -51,24 +51,32 @@ namespace ProtobufFormatter.Formatters
     {
         private static Lazy<RuntimeTypeModel> model = new Lazy<RuntimeTypeModel>(CreateTypeModel);
 
+        public SessionProtobufInputFormatter()
+        {
+            SupportedMediaTypes.Add(MediaTypeHeaderValue.Parse("application/x-protobuf"));
+
+        }
+
         public static RuntimeTypeModel Model
         {
             get { return model.Value; }
         }
 
-        public override Task<InputFormatterResult> ReadRequestBodyAsync(InputFormatterContext context)
+        public override async Task<InputFormatterResult> ReadRequestBodyAsync(InputFormatterContext context)
         {
             var type = context.ModelType;
             var request = context.HttpContext.Request;
             MediaTypeHeaderValue requestContentType = null;
             MediaTypeHeaderValue.TryParse(request.ContentType, out requestContentType);
 
-
-            object result = Model.Deserialize(context.HttpContext.Request.Body, null, type);
-            return InputFormatterResult.SuccessAsync(result);
+            MemoryStream stream = new MemoryStream();
+            await request.Body.CopyToAsync(stream);
+            stream.Position = 0;
+            object result = Model.Deserialize(stream, null, type, stream.Length);
+            return await InputFormatterResult.SuccessAsync(result);
         }
 
-        public override bool CanRead(InputFormatterContext context)
+        protected override bool CanReadType(Type type)
         {
             return true;
         }
@@ -76,7 +84,8 @@ namespace ProtobufFormatter.Formatters
 
         private static RuntimeTypeModel CreateTypeModel()
         {
-            var typeModel = RuntimeTypeModel.Default;
+            //RuntimeTypeModel typeModel = RuntimeTypeModel.Default;
+            var typeModel = RuntimeTypeModel.Create();
             typeModel.UseImplicitZeroDefaults = false;
             return typeModel;
         }

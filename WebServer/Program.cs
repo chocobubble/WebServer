@@ -4,22 +4,14 @@ using WebServer.Repository.Interface;
 using WebServer.Repository;
 using Microsoft.Net.Http.Headers;
 using ProtobufFormatter.Formatters;
-using CustomFormattersSample.Formatters;
-using ProtoBuf.Meta;
 
 var builder = WebApplication.CreateBuilder(args);
 // protobuf
-/*
-builder.Services.AddControllers(options =>
-{
-    //options.InputFormatters.Insert(0, new SessionProtobufInputFormatter());
-    options.OutputFormatters.Insert(0, new SessionProtobufOutputFormatter());
-   // options.FormatterMappings.SetMediaTypeMappingForFormat("protobuf", MediaTypeHeaderValue.Parse("application/x-protobuf"));
-});*/
-builder.Services.AddControllers(options =>
-{
-    options.OutputFormatters.Insert(0, new SessionProtobufOutputFormatter());
 
+builder.Services.AddControllers(options =>
+{
+    options.OutputFormatters.Insert(0, new SessionProtobufOutputFormatter());
+    options.InputFormatters.Insert(0, new SessionProtobufInputFormatter());
     options.FormatterMappings
         .SetMediaTypeMappingForFormat("protobuf",
           MediaTypeHeaderValue.Parse("application/x-protobuf"));
@@ -28,6 +20,7 @@ builder.Services.AddControllers(options =>
 
 //builder.Services.AddControllers();
 builder.Services.AddSingleton<IAccountService, AccountService>();
+builder.Services.AddSingleton<ISessionService, SessionService>();
 builder.Services.AddSingleton<IAccountRepository, AccountRepository>();
 builder.Services.AddSingleton<ICharacterDataRepository, CharacterDataRepository>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

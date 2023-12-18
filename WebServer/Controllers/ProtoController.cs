@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Google.Protobuf;
 using Microsoft.AspNetCore.Mvc;
+using WebServer.HttpCommand;
 using WebServer.Model;
 using WebServer.Protos;
 using WebServer.Repository.Interface;
@@ -30,19 +31,7 @@ namespace WebServer.Controllers
             _protoTestService = new ProtoTestService();
             _loadService = new LoadService(accountRepository);
         }
-        /*
-        [HttpGet]
-        public string Hello()
-        {
-            return _protoTestService.Hello();
-        }
 
-        [HttpGet]
-        public string NewHello()
-        {
-            return _protoTestService.SerializeHello();
-        }
-        */
         [HttpGet]
         public string LoadCharacterData()
         {
@@ -52,23 +41,6 @@ namespace WebServer.Controllers
         [HttpGet]
         public byte[] ProtoTest1()
         {
-            //CharacterData characterData = new CharacterData();
-            //WeaponSaveData weaponSaveData = new WeaponSaveData();
-            //weaponSaveData.WeaponType = WeaponSaveData.Types.WeaponType.EwtRifle;
-            //weaponSaveData.WeaponLevel = 2;
-            //weaponSaveData.WeaponEnhancementLevel = 3;
-            //characterData.Level = 3;
-            //characterData.Exp = 5;
-            //characterData.PlayerName = "palyer";
-            //characterData.Gold = 100;
-            ////characterData.WeaponSaveData = weaponSaveData;
-            //characterData.WeaponSaveData = new WeaponSaveData();
-            //characterData.WeaponSaveData.WeaponLevel = 2;
-            //characterData.WeaponSaveData.WeaponEnhancementLevel = 3;
-            //characterData.WeaponSaveData.WeaponType = WeaponSaveData.Types.WeaponType.EwtRifle;
-            //characterData.RifleAmmo = 1000;
-            //byte[] bytes = Encoding.UTF8.GetBytes("prototo");
-
             CharacterData characterData = new CharacterData
             {
                 Level = 3,
@@ -85,23 +57,6 @@ namespace WebServer.Controllers
         [HttpGet]
         public ByteString ProtoTest2()
         {
-            //CharacterData characterData = new CharacterData();
-            //WeaponSaveData weaponSaveData = new WeaponSaveData();
-            //weaponSaveData.WeaponType = WeaponSaveData.Types.WeaponType.EwtRifle;
-            //weaponSaveData.WeaponLevel = 2;
-            //weaponSaveData.WeaponEnhancementLevel = 3;
-            //characterData.Level = 3;
-            //characterData.Exp = 5;
-            //characterData.PlayerName = "palyer";
-            //characterData.Gold = 100;
-            ////characterData.WeaponSaveData = weaponSaveData;
-            //characterData.WeaponSaveData = new WeaponSaveData();
-            //characterData.WeaponSaveData.WeaponLevel = 2;
-            //characterData.WeaponSaveData.WeaponEnhancementLevel = 3;
-            //characterData.WeaponSaveData.WeaponType = WeaponSaveData.Types.WeaponType.EwtRifle;
-            //characterData.RifleAmmo = 1000;
-            //byte[] bytes = Encoding.UTF8.GetBytes("prototo");
-
             CharacterData characterData = new CharacterData
             {
                 Level = 3,
@@ -197,6 +152,30 @@ namespace WebServer.Controllers
                 RifleAmmo = 1000
             };
             return Ok(characterData);
+        }
+
+        [HttpPost]
+        public String ProtoTest10([FromBody]CharacterData2 characterData)
+        {
+            var data = characterData;
+            return data.PlayerName;
+        }
+
+        [HttpPost]
+        public String ProtoTest11(byte[] bytes)
+        {
+            CharacterData data;
+            data = CharacterData.Parser.ParseFrom(bytes);
+            return data.PlayerName;
+        }
+
+        [HttpGet]
+        public LoginResponse LoginResponseTest()
+        {
+            LoginResponse loginResponse = new LoginResponse();
+            loginResponse.ApiReturnCode = ApiReturnCode.Success;
+            loginResponse.SessionId = "session Id";
+            return loginResponse;
         }
 
     }

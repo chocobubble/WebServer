@@ -13,7 +13,7 @@ namespace WebServer.Controllers
 
         public AccountController(ILogger<AccountController> logger, IAccountService accountService)
         {
-            _logger = logger;
+            this._logger = logger;
             this._accountService = accountService;
         }
 
@@ -23,10 +23,26 @@ namespace WebServer.Controllers
             return _accountService.CreateAccount(userId, userPwd);
         }
 
+        /*
         [HttpPost]
         public string Login(string userId, string userPwd)
         {
             return _accountService.Login(userId, userPwd);
+        }*/
+
+        [HttpPost]
+        public string Login(string userId, string userPwd)
+        {
+            if (!_accountService.IsValidId(userId))
+            {
+                return "Invalid_Id";
+            }
+            else if (!_accountService.IsValidPassword(userId, userPwd))
+            {
+                return "Invalid_Pwd";
+            }
+
+            return "";
         }
 
         [HttpPost]

@@ -28,8 +28,6 @@ namespace WebServer.Service
                 // 중복 로그인 처리
                 // 이전의 세션 상태를 중복 로그인으로 변경
             }
-
-
             UserSession userSession = new UserSession();
             userSession.SessionId = Guid.NewGuid().ToString();
             userSession.UserId = userId;
@@ -73,6 +71,17 @@ namespace WebServer.Service
             }
 
             userSession.ExpireTime = DateTime.Now.AddMinutes(3);
+            return true;
+        }
+
+        public bool DeleteSessionId(string sessionId)
+        {
+            if (!_sessionIdToUserSession.TryGetValue(sessionId, out _))
+            {
+                return false;
+            }
+
+            _sessionIdToUserSession.Remove(sessionId);
             return true;
         }
     }
