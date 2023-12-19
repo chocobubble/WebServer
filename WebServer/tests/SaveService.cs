@@ -3,8 +3,9 @@ using WebServer.Repository;
 using WebServer.Repository.Interface;
 using WebServer.Service.Interface;
 
-namespace WebServer.Service
+namespace WebServer.Test
 {
+    /*
     public class SaveService : ISaveService
     {
         private IAccountRepository _accountRepository;
@@ -48,4 +49,5 @@ namespace WebServer.Service
         }
 
     }
+    */
 }

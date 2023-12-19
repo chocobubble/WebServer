@@ -32,6 +32,24 @@ namespace WebServer.Service
             }
         }
 
+        public bool IsValidId(string inputId)
+        {
+            if (!_accountRepository.IsEnrolledAccount(inputId))
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public bool IsValidPassword(string inputId, string inputPwd)
+        {
+            if (!_accountRepository.IsCorrectPassword(inputId, inputPwd))
+            {
+                return false;
+            }
+            return true;
+        }
+
     }
 }
 

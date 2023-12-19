@@ -76,7 +76,7 @@ namespace WebServer.Controllers
             {
                 _sessionService.RefreshSessionId(requestSessionId);
                 // 중복 로그인 확인 
-                if (_sessionService.IsValidSession(requestSessionId))
+                if (_sessionService.IsDuplicatedLogin(requestSessionId))
                 {
                     refreshSessionResponse.apiReturnCode = ApiReturnCode.Success;
                 }
@@ -95,13 +95,13 @@ namespace WebServer.Controllers
 
 
         [HttpPost]
-        public string LogOut(string sessionId)
+        public LogoutResponse LogOut(LogoutRequest logoutRequest)
         {
-            if (!_sessionService.DeleteSessionId(sessionId))
-            {
-                return "fail";
-            }
-            return "success";
+            _sessionService.DeleteSessionId(logoutRequest.sessionId);
+
+            LogoutResponse logoutResponse = new LogoutResponse();
+            logoutResponse.apiReturnCode = ApiReturnCode.Success;
+            return logoutResponse;
         }
     }
 }

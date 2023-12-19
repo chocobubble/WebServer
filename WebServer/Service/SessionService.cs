@@ -44,6 +44,16 @@ namespace WebServer.Service
 
         public bool IsValidSession(string sessionId)
         {
+            if (!IsValidSessionId(sessionId))
+            {
+                return false;
+            }
+            RefreshSessionId(sessionId);
+            return true;
+        }
+
+        public bool IsDuplicatedLogin(string sessionId)
+        {
             if (_sessionIdToUserSession.TryGetValue(sessionId, out UserSession userSession))
             {
                 if (userSession.State == StateType.Valid)

@@ -14,24 +14,60 @@ namespace WebServer.Controllers
     { 
         private readonly ILogger<DataController> _logger;
         private readonly DataService _dataService;
+        private readonly SessionService _sessionService;
 
         public DataController(ILogger<DataController> logger, ICharacterDataRepository characterDataRepository)
         {
             _logger = logger;
             _dataService = new DataService(characterDataRepository);
+            _sessionService = new SessionService();
         }
 
         [HttpPost]
         public CharacterDataSaveResponse SaveCharacterData(CharacterDataSaveRequest request)
         {
-            _dataService.SaveCharacterData(request.sessionId, bytes);
-            return "캐릭터 데이터 저장에 성공했습니다";
+            CharacterDataSaveResponse response = new CharacterDataSaveResponse();
+
+            if (!_sessionService.IsValidSession(request.sessionId))
+            {
+                response.apiReturnCode = ApiReturnCode.Fail;
+            }
+            else if (_sessionService.IsDuplicatedLogin(request.sessionId))
+            {
+                response.apiReturnCode = ApiReturnCode.DuplicatedLogin;
+            }
+            else if (!_dataService.SaveCharacterData(request.sessionId, request.characterData))
+            {
+                response.apiReturnCode = ApiReturnCode.Fail;
+            }
+            else // 캐릭터 데이터 저장 성공
+            {
+                response.apiReturnCode = ApiReturnCode.Success;
+            }
+
+            return response;
         }
 
         [HttpGet]
-        public byte[] LoadCharacterData(string userId)
+        public CharacterDataLoadResponse LoadCharacterData(CharacterDataLoadRequest request)
         {
-            return _dataService.LoadCharacterData(userId);
+            CharacterDataLoadResponse response = new CharacterDataLoadResponse();
+
+            if (!_sessionService.IsValidSession(request.sessionId))
+            {
+                response.apiReturnCode = ApiReturnCode.Fail;
+            }
+            else if (_sessionService.IsDuplicatedLogin(request.sessionId))
+            {
+                response.apiReturnCode = ApiReturnCode.DuplicatedLogin;
+            }
+            else // 캐릭터 데이터 저장 성공
+            {
+                response.characterData = _dataService.LoadCharacterData(request.sessionId);
+                response.apiReturnCode = ApiReturnCode.Success;
+            }
+
+            return response;
         }
     }
 }

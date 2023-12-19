@@ -13,14 +13,14 @@ namespace WebServer.HttpCommand
     public class CharacterDataLoadResponse : BaseResponse
     {
         [ProtoMember(2)]
-        CharacterData data { get; set; }
+        public CharacterData characterData { get; set; }
     }
 
     [ProtoContract]
     public class CharacterDataSaveRequest : BaseRequest
     {
         [ProtoMember(2)]
-        CharacterData data { get; set; }
+        public CharacterData characterData { get; set; }
     }
 
     [ProtoContract]

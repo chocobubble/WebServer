@@ -15,169 +15,191 @@ using WebServer.Service;
 
 namespace WebServer.Controllers
 {
+
+    
     [ApiController]
     [Route("[controller]/[action]")]
     public class ProtoController : ControllerBase
     {
         private readonly ILogger<ProtoController> _logger;
 
-        private ProtoTestService _protoTestService;
+        //private ProtoTestService _protoTestService;
 
-        private LoadService _loadService;
+        //private LoadService _loadService;
 
         public ProtoController(ILogger<ProtoController> logger, IAccountRepository accountRepository)
         {
             _logger = logger;
-            _protoTestService = new ProtoTestService();
-            _loadService = new LoadService(accountRepository);
+            //_protoTestService = new ProtoTestService();
+            //_loadService = new LoadService(accountRepository);
         }
 
         [HttpGet]
-        public string LoadCharacterData()
+        public CreateAccountRequest ProtoTest()
         {
-            return _loadService.ProtoTest();
+            CreateAccountRequest request = new CreateAccountRequest();
+            request.sessionId = "sessionid";
+            request.Id = "playerId";
+            request.Password = "password";
+            return request;
         }
 
         [HttpGet]
-        public byte[] ProtoTest1()
+        public CreateAccountResponse ProtoTest2()
         {
-            CharacterData characterData = new CharacterData
+            CreateAccountResponse response = new CreateAccountResponse();
+            response.apiReturnCode = ApiReturnCode.Success;
+            return response;
+        }
+
+        /*
+            [HttpGet]
+            public string LoadCharacterData()
             {
-                Level = 3,
-                Exp = 5,
-                PlayerName = "player",
-                Gold = 100,
-                WeaponSaveData = new WeaponSaveData { WeaponLevel = 2, WeaponEnhancementLevel = 3, WeaponType = WeaponSaveData.Types.WeaponType.EwtRifle },
-                RifleAmmo = 1000
-            };
-            byte[] bytes = characterData.ToByteArray();
-            return bytes;
-        }
+                return _loadService.ProtoTest();
+            }
 
-        [HttpGet]
-        public ByteString ProtoTest2()
-        {
-            CharacterData characterData = new CharacterData
+            [HttpGet]
+            public byte[] ProtoTest1()
             {
-                Level = 3,
-                Exp = 5,
-                PlayerName = "player",
-                Gold = 100,
-                WeaponSaveData = new WeaponSaveData { WeaponLevel = 2, WeaponEnhancementLevel = 3, WeaponType = WeaponSaveData.Types.WeaponType.EwtRifle },
-                RifleAmmo = 1000
-            };
-            ByteString byteString =  characterData.ToByteString();
-            return byteString;
-        }
+                CharacterData characterData = new CharacterData
+                {
+                    Level = 3,
+                    Exp = 5,
+                    PlayerName = "player",
+                    Gold = 100,
+                    WeaponSaveData = new WeaponSaveData { WeaponLevel = 2, WeaponEnhancementLevel = 3, WeaponType = WeaponSaveData.Types.WeaponType.EwtRifle },
+                    RifleAmmo = 1000
+                };
+                byte[] bytes = characterData.ToByteArray();
+                return bytes;
+            }
 
-        [HttpGet]
-        public String ProtoTest3()
-        {
-
-            CharacterData characterData = new CharacterData
+            [HttpGet]
+            public ByteString ProtoTest2()
             {
-                Level = 3,
-                Exp = 5,
-                PlayerName = "player",
-                Gold = 100,
-                WeaponSaveData = new WeaponSaveData { WeaponLevel = 2, WeaponEnhancementLevel = 3, WeaponType = WeaponSaveData.Types.WeaponType.EwtRifle },
-                RifleAmmo = 1000
-            };
-            return characterData.ToString();
-        }
+                CharacterData characterData = new CharacterData
+                {
+                    Level = 3,
+                    Exp = 5,
+                    PlayerName = "player",
+                    Gold = 100,
+                    WeaponSaveData = new WeaponSaveData { WeaponLevel = 2, WeaponEnhancementLevel = 3, WeaponType = WeaponSaveData.Types.WeaponType.EwtRifle },
+                    RifleAmmo = 1000
+                };
+                ByteString byteString =  characterData.ToByteString();
+                return byteString;
+            }
 
-        [HttpGet]
-        public byte[] ProtoTest4()
-        {
-            ProtoTest protoTest = new ProtoTest
+            [HttpGet]
+            public String ProtoTest3()
             {
-                Num = 1
-            };
-            byte[] bytes = protoTest.ToByteArray();
-            return bytes;
-        }
 
-        [HttpGet]
-        public ByteString ProtoTest5()
-        {
-            CharacterData characterData = new CharacterData
+                CharacterData characterData = new CharacterData
+                {
+                    Level = 3,
+                    Exp = 5,
+                    PlayerName = "player",
+                    Gold = 100,
+                    WeaponSaveData = new WeaponSaveData { WeaponLevel = 2, WeaponEnhancementLevel = 3, WeaponType = WeaponSaveData.Types.WeaponType.EwtRifle },
+                    RifleAmmo = 1000
+                };
+                return characterData.ToString();
+            }
+
+            [HttpGet]
+            public byte[] ProtoTest4()
             {
-                Level = 3,
-                Exp = 5,
-                PlayerName = "player",
-                Gold = 100,
-                WeaponSaveData = new WeaponSaveData { WeaponLevel = 2, WeaponEnhancementLevel = 3, WeaponType = WeaponSaveData.Types.WeaponType.EwtRifle },
-                RifleAmmo = 1000
-            };
-            ByteString byteString = characterData.ToByteString();
-            return byteString;
-        }
+                ProtoTest protoTest = new ProtoTest
+                {
+                    Num = 1
+                };
+                byte[] bytes = protoTest.ToByteArray();
+                return bytes;
+            }
 
-        
-        [HttpGet]
-        public IActionResult ProtoTest6()
-        {
-            UserSession userSession =  new UserSession() { SessionId = Guid.NewGuid().ToString(), UserId = "Moon", ExpireTime = DateTime.Now, State = "state"};
-            return Ok(userSession);
-        }
-
-        [HttpGet]
-        public ProtoTest ProtoTest7()
-        {
-            ProtoTest protoTest = new ProtoTest
+            [HttpGet]
+            public ByteString ProtoTest5()
             {
-                Num = 1
-            };
-            byte[] bytes = protoTest.ToByteArray();
-            return protoTest;
-        }
+                CharacterData characterData = new CharacterData
+                {
+                    Level = 3,
+                    Exp = 5,
+                    PlayerName = "player",
+                    Gold = 100,
+                    WeaponSaveData = new WeaponSaveData { WeaponLevel = 2, WeaponEnhancementLevel = 3, WeaponType = WeaponSaveData.Types.WeaponType.EwtRifle },
+                    RifleAmmo = 1000
+                };
+                ByteString byteString = characterData.ToByteString();
+                return byteString;
+            }
 
-        [HttpGet]
-        public IActionResult ProtoTest8()
-        {
-            ProtobufModelDto protobufModelDto =  new ProtobufModelDto() { Id = 1, Name = "moon", StringValue = "str" };
-            return Ok(protobufModelDto);
-        }
 
-        //[HttpGet]
-        //public IActionResult ProtoTest9()
-        //{
-        //    CharacterData2 characterData = new CharacterData2
-        //    {
-        //        Level = 3,
-        //        Exp = 5,
-        //        PlayerName = "player",
-        //        Gold = 100,
-        //        weaponSaveData = new WeaponSaveData2 { WeaponLevel = 2, WeaponEnhancementLevel = 3, weaponType = WeaponType.EWT_RIFLE },
-        //        RifleAmmo = 1000
-        //    };
-        //    return Ok(characterData);
-        //}
+            [HttpGet]
+            public IActionResult ProtoTest6()
+            {
+                UserSession userSession =  new UserSession() { SessionId = Guid.NewGuid().ToString(), UserId = "Moon", ExpireTime = DateTime.Now, State = "state"};
+                return Ok(userSession);
+            }
 
-        //[HttpPost]
-        //public String ProtoTest10([FromBody]CharacterData2 characterData)
-        //{
-        //    var data = characterData;
-        //    return data.PlayerName;
-        //}
+            [HttpGet]
+            public ProtoTest ProtoTest7()
+            {
+                ProtoTest protoTest = new ProtoTest
+                {
+                    Num = 1
+                };
+                byte[] bytes = protoTest.ToByteArray();
+                return protoTest;
+            }
 
-        [HttpPost]
-        public String ProtoTest11(byte[] bytes)
-        {
-            CharacterData data;
-            data = CharacterData.Parser.ParseFrom(bytes);
-            return data.PlayerName;
-        }
+            [HttpGet]
+            public IActionResult ProtoTest8()
+            {
+                ProtobufModelDto protobufModelDto =  new ProtobufModelDto() { Id = 1, Name = "moon", StringValue = "str" };
+                return Ok(protobufModelDto);
+            }
 
-        [HttpGet]
-        public LoginResponse LoginResponseTest()
-        {
-            LoginResponse loginResponse = new LoginResponse();
-            loginResponse.apiReturnCode = ApiReturnCode.Success;
-            loginResponse.SessionId = "session Id";
-            return loginResponse;
-        }
+            //[HttpGet]
+            //public IActionResult ProtoTest9()
+            //{
+            //    CharacterData2 characterData = new CharacterData2
+            //    {
+            //        Level = 3,
+            //        Exp = 5,
+            //        PlayerName = "player",
+            //        Gold = 100,
+            //        weaponSaveData = new WeaponSaveData2 { WeaponLevel = 2, WeaponEnhancementLevel = 3, weaponType = WeaponType.EWT_RIFLE },
+            //        RifleAmmo = 1000
+            //    };
+            //    return Ok(characterData);
+            //}
 
+            //[HttpPost]
+            //public String ProtoTest10([FromBody]CharacterData2 characterData)
+            //{
+            //    var data = characterData;
+            //    return data.PlayerName;
+            //}
+
+            [HttpPost]
+            public String ProtoTest11(byte[] bytes)
+            {
+                CharacterData data;
+                data = CharacterData.Parser.ParseFrom(bytes);
+                return data.PlayerName;
+            }
+
+            [HttpGet]
+            public LoginResponse LoginResponseTest()
+            {
+                LoginResponse loginResponse = new LoginResponse();
+                loginResponse.apiReturnCode = ApiReturnCode.Success;
+                loginResponse.SessionId = "session Id";
+                return loginResponse;
+            }
+        */
     }
+    
 }
 

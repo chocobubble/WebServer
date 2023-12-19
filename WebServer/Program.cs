@@ -50,6 +50,6 @@ app.MapControllers();
 
 // gRPC
 app.MapGrpcService<GreeterService>();
-app.MapGrpcService<LoadService>();
+//app.MapGrpcService<LoadService>();
 
 app.Run();
