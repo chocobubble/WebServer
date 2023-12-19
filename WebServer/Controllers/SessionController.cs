@@ -21,30 +21,9 @@ namespace WebServer.Controllers
             this._sessionService = sessionService;
         }
 
+        
         [HttpPost]
-        public LoginResponse Login(LoginRequest2 loginRequest)
-        {
-            string userId = loginRequest.Id;
-            string userPwd = loginRequest.Password;
-            LoginResponse loginResponse = new LoginResponse();
-            if (!_accountService.IsValidId(userId))
-            {
-                loginResponse.apiReturnCode = ApiReturnCode.InvalidUserId;
-            }
-            else if (!_accountService.IsValidPassword(userId, userPwd))
-            {
-                loginResponse.apiReturnCode = ApiReturnCode.InvalidUserPassword;
-            }
-            else
-            {
-                loginResponse.apiReturnCode = ApiReturnCode.Success;
-                loginResponse.SessionId = _sessionService.CreateSessionId(userId);
-            }
-            return loginResponse;
-        }
-
-        [HttpPost]
-        public LoginResponse Login2(LoginRequest loginRequest)
+        public LoginResponse Login(LoginRequest loginRequest)
         {
             string userId = loginRequest.Id;
             string userPwd = loginRequest.Password;

@@ -38,18 +38,20 @@ namespace WebServer.Controllers
         public CreateAccountRequest ProtoTest()
         {
             CreateAccountRequest request = new CreateAccountRequest();
-            request.sessionId = "sessionid";
-            request.Id = "playerId";
-            request.Password = "password";
+            request.sessionId = "DefaultSessionId";
+            request.Id = "Id1";
+            request.Password = "Pwd1";
             return request;
         }
 
         [HttpGet]
-        public CreateAccountResponse ProtoTest2()
+        public CreateAccountRequest2 ProtoTest2()
         {
-            CreateAccountResponse response = new CreateAccountResponse();
-            response.apiReturnCode = ApiReturnCode.Success;
-            return response;
+            CreateAccountRequest2 request = new CreateAccountRequest2();
+            request.sessionId = "DefaultSessionId";
+            request.Id = "Id1";
+            request.Password = "Pwd1";
+            return request;
         }
 
         /*
