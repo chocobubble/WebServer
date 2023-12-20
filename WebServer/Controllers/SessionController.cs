@@ -25,8 +25,8 @@ namespace WebServer.Controllers
         [HttpPost]
         public LoginResponse Login(LoginRequest loginRequest)
         {
-            string userId = loginRequest.Id;
-            string userPwd = loginRequest.Password;
+            string userId = loginRequest.id;
+            string userPwd = loginRequest.password;
             LoginResponse loginResponse = new LoginResponse();
             if (!_accountService.IsValidId(userId))
             {

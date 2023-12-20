@@ -3,7 +3,7 @@ using ProtoBuf;
 namespace WebServer.HttpCommand
 {
     [ProtoContract]
-    public class CreateAccountRequest : BaseRequest
+    public class CreateAccountRequest2 : BaseRequest
     {
         [ProtoMember(2)]
         public string id { get; set; }
@@ -12,12 +12,12 @@ namespace WebServer.HttpCommand
     }
 
     [ProtoContract]
-    public class CreateAccountResponse : BaseResponse
+    public class CreateAccountResponse2 : BaseResponse
     {
     }
 
     [ProtoContract]
-    public class CreateAccountRequest2
+    public class CreateAccountRequest
     {
         [ProtoMember(1)]
         public string sessionId { get; set; }
@@ -26,6 +26,13 @@ namespace WebServer.HttpCommand
         [ProtoMember(3)]
         public string password { get; set; }
 
+    }
+
+    [ProtoContract]
+    public class CreateAccountResponse
+    {
+        [ProtoMember(1)]
+        public ApiReturnCode apiReturnCode { get; set; }
     }
 
 }
