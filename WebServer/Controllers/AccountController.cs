@@ -23,7 +23,7 @@ namespace WebServer.Controllers
         {
             CreateAccountResponse response = new CreateAccountResponse();
 
-            if (_accountService.CreateAccount(request.Id,request.Password))
+            if (_accountService.CreateAccount(request.id,request.password))
             {
                 response.apiReturnCode = ApiReturnCode.Success;
             }

@@ -2,17 +2,18 @@
 using ProtoBuf;
 namespace WebServer.Check
 {
-	[ProtoContract]
-	public class BaseRequest
-	{
-		[ProtoMember(1)]
-		public string sessionId { get; set; }
-	}
+    [ProtoContract]
+    [ProtoInclude(2, typeof(CreateAccountRequest))]
+    public class BaseRequest
+    {
+        [ProtoMember(1)]
+        public string sessionId { get; set; }
+    }
 
-	[ProtoContract]
-	public class BaseResponse
-	{
-		[ProtoMember(1)]
+    [ProtoContract]
+    public class BaseResponse
+    {
+        [ProtoMember(1)]
         public ApiReturnCode apiReturnCode { get; set; }
     }
 
@@ -20,9 +21,9 @@ namespace WebServer.Check
     public enum ApiReturnCode
     {
         None = 0,
-		[ProtoMember(1)]
+        [ProtoMember(1)]
         Success = 1,
-		[ProtoMember(2)]
+        [ProtoMember(2)]
         Fail = 2,
         [ProtoMember(3)]
         InvalidSessionId = 3,

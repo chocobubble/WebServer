@@ -6,14 +6,22 @@ namespace WebServer.Check
     public class CreateAccountRequest : BaseRequest
     {
         [ProtoMember(2)]
-        public string Id { get; set; }
+        public string id { get; set; }
         [ProtoMember(3)]
-        public string Password { get; set; }
+        public string password { get; set; }
     }
 
     [ProtoContract]
-    public class CreateAccountResponse : BaseResponse
+    public class CreateAccountRequest2
     {
+        [ProtoMember(1)]
+        public string sessionId { get; set; }
+        [ProtoMember(2)]
+        public string id { get; set; }
+        [ProtoMember(3)]
+        public string password { get; set; }
+
     }
+
 }
 

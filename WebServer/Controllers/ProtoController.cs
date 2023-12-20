@@ -39,8 +39,8 @@ namespace WebServer.Controllers
         {
             CreateAccountRequest request = new CreateAccountRequest();
             request.sessionId = "DefaultSessionId";
-            request.Id = "Id1";
-            request.Password = "Pwd1";
+            request.id = "Id1";
+            request.password = "Pwd1";
             return request;
         }
 
@@ -49,11 +49,25 @@ namespace WebServer.Controllers
         {
             CreateAccountRequest2 request = new CreateAccountRequest2();
             request.sessionId = "DefaultSessionId";
-            request.Id = "Id1";
-            request.Password = "Pwd1";
+            request.id = "Id1";
+            request.password = "Pwd1";
             return request;
         }
 
+        [HttpPost]
+        public string ProtoTest3(CreateAccountRequest request)
+        {
+
+            _logger.Log(LogLevel.Warning, request.sessionId);
+            return request.sessionId;
+        }
+
+        [HttpPost]
+        public string ProtoTest4(CreateAccountRequest2 request)
+        {
+            _logger.Log(LogLevel.Warning, request.sessionId);
+            return request.sessionId;
+        }
         /*
             [HttpGet]
             public string LoadCharacterData()
