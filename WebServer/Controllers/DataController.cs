@@ -1,7 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using WebServer.HttpCommand;
-using WebServer.Model;
-using WebServer.Repository;
 using WebServer.Repository.Interface;
 using WebServer.Service;
 using WebServer.Service.Interface;
@@ -14,13 +12,13 @@ namespace WebServer.Controllers
     { 
         private readonly ILogger<DataController> _logger;
         private readonly DataService _dataService;
-        private readonly SessionService _sessionService;
+        private readonly ISessionService _sessionService;
 
-        public DataController(ILogger<DataController> logger, ICharacterDataRepository characterDataRepository)
+        public DataController(ILogger<DataController> logger, ICharacterDataRepository characterDataRepository, ISessionService sessionService)
         {
             _logger = logger;
             _dataService = new DataService(characterDataRepository);
-            _sessionService = new SessionService();
+            _sessionService = sessionService;
         }
 
         [HttpPost]
@@ -61,7 +59,7 @@ namespace WebServer.Controllers
             {
                 response.apiReturnCode = ApiReturnCode.DuplicatedLogin;
             }
-            else // 캐릭터 데이터 저장 성공
+            else // 캐릭터 데이터 로 성공
             {
                 response.characterData = _dataService.LoadCharacterData(request.sessionId);
                 response.apiReturnCode = ApiReturnCode.Success;

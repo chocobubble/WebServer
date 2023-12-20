@@ -8,5 +8,7 @@ namespace WebServer.Repository.Interface
         public void AddCharacterData(string userId, CharacterData characterData);
         public bool HasCharacterData(string userId);
         public CharacterData LoadCharacterData(string userId);
+        public void SortRankingList();
+        public int GetRank(string userId);
     }
 }

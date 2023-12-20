@@ -1,8 +1,5 @@
 ﻿using WebServer.Model;
-using WebServer.Repository;
 using WebServer.Service.Interface;
-using WebServer.Protos;
-using Google.Protobuf;
 using WebServer.Repository.Interface;
 
 namespace WebServer.Service
@@ -26,6 +23,7 @@ namespace WebServer.Service
             {
                 _characterDataRepository.SaveCharacterData(userId, data);
             }
+
             return true;
         }
 
@@ -38,6 +36,7 @@ namespace WebServer.Service
                 data.playerName = "Invalid";
                 return data;
             }
+
             return _characterDataRepository.LoadCharacterData(userId);
         }
 

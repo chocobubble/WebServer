@@ -1,6 +1,5 @@
 ﻿using System;
 using Grpc.Core;
-using WebServer.Protos;
 
 namespace WebServer.Service.Interface
 {

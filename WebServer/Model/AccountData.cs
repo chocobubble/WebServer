@@ -1,11 +1,9 @@
 ﻿using Microsoft.OpenApi.Any;
 using System.Collections;
 using System.Collections.Immutable;
-using WebServer.Protos;
-
 namespace WebServer.Model
 {
-    public class AccountData 
+    public class AccountData
     {
 
         public AccountData(string playerId, string userPassword)

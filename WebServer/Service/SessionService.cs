@@ -9,29 +9,18 @@ namespace WebServer.Service
         private Dictionary<string, UserSession> _sessionIdToUserSession = new Dictionary<string, UserSession>();
         private Dictionary<string, UserSession> _UserIdToSessionId = new Dictionary<string, UserSession>();
 
-
         public SessionService()
 		{
 		}
-        // 1. 세션 생성
-        // 2. 세션이 유효한지 확인
-        // 3. 세션을 연장
 
-        // 로그인 할 때, 세션을 만들어줌
-        // 세션은 어떤 유저의 세션인지 알 수 있어야 됨
-        // 세션을 사용하면 동접 지표를 대략적으로 알 수 있음
         public string CreateSessionId(string userId)
         {
+            // 중복 로그인 처리 
             if (_UserIdToSessionId.TryGetValue(userId, out UserSession loginUserSession))
             {
-                // 어? 너 이미 로그인한 상태인데?
-                // 중복 로그인 처리
-                // 이전의 세션 상태를 중복 로그인으로 변경
                 loginUserSession.State = StateType.Duplicated;
-
             }
 
-            // 새로운 세션 생성
             UserSession userSession = new UserSession();
             userSession.SessionId = Guid.NewGuid().ToString();
             userSession.UserId = userId;
@@ -39,6 +28,7 @@ namespace WebServer.Service
 
             _sessionIdToUserSession.Add(userSession.SessionId, userSession);
             _UserIdToSessionId.Add(userId, userSession);
+
             return userSession.SessionId;
         }
 
@@ -49,6 +39,7 @@ namespace WebServer.Service
                 return false;
             }
             RefreshSessionId(sessionId);
+
             return true;
         }
 
@@ -56,12 +47,13 @@ namespace WebServer.Service
         {
             if (_sessionIdToUserSession.TryGetValue(sessionId, out UserSession userSession))
             {
-                if (userSession.State == StateType.Valid)
+                if (userSession.State == StateType.Duplicated)
                 {
                     return true;
                 }
             }
-            return false;
+
+            return false; 
         }
 
         public bool IsValidSessionId(string sessionId)
@@ -70,8 +62,6 @@ namespace WebServer.Service
             {
                 return false;
             }
-
-            // State를 체크해서 중복 로그인이면 기존에 접속 했던 유저에게 중복 로그인이란느 것을 알려줌
 
             if (DateTime.Now > userSession.ExpireTime)
             {
@@ -85,8 +75,6 @@ namespace WebServer.Service
 
         public bool RefreshSessionId(string sessionId)
         {
-            // 유효 세션 확인
-            // 중복 세션 확인
             if (!_sessionIdToUserSession.TryGetValue(sessionId, out UserSession userSession))
             {
                 return false;
@@ -99,6 +87,7 @@ namespace WebServer.Service
             }
 
             userSession.ExpireTime = DateTime.Now.AddMinutes(3);
+
             return true;
         }
 
@@ -111,7 +100,13 @@ namespace WebServer.Service
 
             _UserIdToSessionId.Remove(userSession.UserId);
             _sessionIdToUserSession.Remove(sessionId);
+
             return true;
+        }
+
+        public string GetUserIdFromSessionId(string sessionId)
+        {
+            return _sessionIdToUserSession[sessionId].UserId;
         }
     }
 }

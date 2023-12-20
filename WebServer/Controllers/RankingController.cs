@@ -1,11 +1,9 @@
 using System.Reflection.Metadata;
 using Microsoft.AspNetCore.Mvc;
-using WebServer.Model;
-
-// ��ŷ ��Ʈ�ѷ��� �����
-// ��ŷ�� �����ϴ� ���
-// ��ü ��ŷ�� �ҷ����� ��� (1~100�����)
-// ���� ��ŷ�� �ҷ����� ��� (1~100�����)
+using WebServer.HttpCommand;
+using WebServer.Repository.Interface;
+using WebServer.Service;
+using WebServer.Service.Interface;
 
 namespace WebServer.Controllers
 { 
@@ -13,32 +11,26 @@ namespace WebServer.Controllers
     [Route("[controller]/[action]")]
     public class RankingController : ControllerBase
     {
-
         private readonly ILogger<RankingController> _logger;
+        private readonly RankingService _rankingService;
+        private readonly ISessionService _sessionService;
 
-        public RankingController(ILogger<RankingController> logger)
+        public RankingController(ILogger<RankingController> logger, ICharacterDataRepository characterDataRepository, ISessionService sessionService)
         {
             _logger = logger;
-        }
-        /*
-        [HttpGet]
-        public string GetMyRank()
-        {
-            return AccountController.accountManagerInstance.GetLoginUserRank();
+            _rankingService = new RankingService(characterDataRepository);
+            _sessionService = sessionService;
         }
 
-        [HttpGet]
-        public string PrintMyInfo()
+        [HttpPost]
+        public RankResponse GetRank(RankRequest request)
         {
-            return AccountController.accountManagerInstance.PrintLoginUserInfo();
+            string userId = _sessionService.GetUserIdFromSessionId(request.sessionId);
+            RankResponse response = new RankResponse();
+            response.ranking = _rankingService.GetRank(userId);
+            response.apiReturnCode = ApiReturnCode.Success;
+            return response;
         }
-
-        [HttpGet]
-        public string PrintAllScorer()
-        {
-            return AccountController.accountManagerInstance.PrintAllScorer();
-        }
-        */
     }
 }
 

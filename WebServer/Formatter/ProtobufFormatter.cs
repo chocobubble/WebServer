@@ -4,9 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Net.Http.Headers;
-using ProtoBuf;
 using ProtoBuf.Meta;
-using WebServer.Protos;
 
 namespace ProtobufFormatter.Formatters
 {

@@ -1,7 +1,6 @@
 ﻿using WebServer.Model;
 using WebServer.Repository;
 using WebServer.Service.Interface;
-using WebServer.Protos;
 using Google.Protobuf;
 using WebServer.Repository.Interface;
 

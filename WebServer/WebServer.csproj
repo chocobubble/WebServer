@@ -30,20 +30,10 @@
     <None Remove="Service\Interface\" />
     <None Remove="Repository\Interface\" />
     <None Remove="Protos\" />
-    <None Remove="Protos\greet.proto" />
     <None Remove="HttpCommand\" />
     <None Remove="Formatter\" />
     <None Remove="tests\" />
     <None Remove="Protos\Check\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Protobuf Include="Protos\greet.proto" GrpcServices="">
-      <Access></Access>
-      <ProtoCompile></ProtoCompile>
-      <CompileOutputs></CompileOutputs>
-      <OutputDir></OutputDir>
-      <Generator></Generator>
-    </Protobuf>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="HttpCommand\" />

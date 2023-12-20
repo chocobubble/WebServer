@@ -1,7 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using WebServer.HttpCommand;
-using WebServer.Model;
-using WebServer.Service;
 using WebServer.Service.Interface;
 
 namespace WebServer.Controllers
@@ -20,7 +18,6 @@ namespace WebServer.Controllers
             this._accountService = accountService;
             this._sessionService = sessionService;
         }
-
         
         [HttpPost]
         public LoginResponse Login(LoginRequest loginRequest)
@@ -45,6 +42,17 @@ namespace WebServer.Controllers
         }
 
         [HttpPost]
+        public LogoutResponse LogOut(LogoutRequest logoutRequest)
+        {
+            _sessionService.DeleteSessionId(logoutRequest.sessionId);
+
+            LogoutResponse logoutResponse = new LogoutResponse();
+            logoutResponse.apiReturnCode = ApiReturnCode.Success;
+
+            return logoutResponse;
+        }
+
+        [HttpPost]
         public RefreshSessionResponse RefreshSession(RefreshSessionRequest refreshSessionRequest)
         {
             string requestSessionId = refreshSessionRequest.sessionId;
@@ -54,14 +62,14 @@ namespace WebServer.Controllers
             if (_sessionService.IsValidSessionId(requestSessionId))
             {
                 _sessionService.RefreshSessionId(requestSessionId);
-                // 중복 로그인 확인 
+                // 중복 로그인 된 상태인지 확인
                 if (_sessionService.IsDuplicatedLogin(requestSessionId))
                 {
-                    refreshSessionResponse.apiReturnCode = ApiReturnCode.Success;
+                    refreshSessionResponse.apiReturnCode = ApiReturnCode.DuplicatedLogin;
                 }
                 else
                 {
-                    refreshSessionResponse.apiReturnCode = ApiReturnCode.DuplicatedLogin;
+                    refreshSessionResponse.apiReturnCode = ApiReturnCode.Success;
                 }
             }
             else
@@ -70,17 +78,6 @@ namespace WebServer.Controllers
             }
 
             return refreshSessionResponse;
-        }
-
-
-        [HttpPost]
-        public LogoutResponse LogOut(LogoutRequest logoutRequest)
-        {
-            _sessionService.DeleteSessionId(logoutRequest.sessionId);
-
-            LogoutResponse logoutResponse = new LogoutResponse();
-            logoutResponse.apiReturnCode = ApiReturnCode.Success;
-            return logoutResponse;
         }
     }
 }

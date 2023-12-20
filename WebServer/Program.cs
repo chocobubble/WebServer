@@ -6,7 +6,6 @@ using Microsoft.Net.Http.Headers;
 using ProtobufFormatter.Formatters;
 
 var builder = WebApplication.CreateBuilder(args);
-// protobuf
 
 builder.Services.AddControllers(options =>
 {
@@ -47,9 +46,5 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
-
-// gRPC
-app.MapGrpcService<GreeterService>();
-//app.MapGrpcService<LoadService>();
 
 app.Run();

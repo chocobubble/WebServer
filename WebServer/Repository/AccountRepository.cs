@@ -1,6 +1,5 @@
 ﻿using System;
 using WebServer.Model;
-using WebServer.Protos;
 using WebServer.Repository.Interface;
 
 namespace WebServer.Repository
@@ -61,10 +60,8 @@ namespace WebServer.Repository
             else
             {
                 return null;
-            }
-            
+            }   
         }
-
     }
 }
 
