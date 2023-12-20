@@ -2,7 +2,7 @@ syntax = "proto3";
 
 message CreateAccountRequest 
 {
-	string sessionId = 1;
-    string Id = 2;
-    string Password = 3;
+    string sessionId = 1;
+    string id = 2;
+    string password = 3;
 }
