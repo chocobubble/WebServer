@@ -20,7 +20,7 @@ namespace WebServer.HttpCommand
         [ProtoMember(1)]
         public ApiReturnCode apiReturnCode { get; set; }
         [ProtoMember(2)]
-        public string SessionId { get; set; }
+        public string sessionId { get; set; }
     }
 
     [ProtoContract]

@@ -36,7 +36,7 @@ namespace WebServer.Controllers
             else
             {
                 loginResponse.apiReturnCode = ApiReturnCode.Success;
-                loginResponse.SessionId = _sessionService.CreateSessionId(userId);
+                loginResponse.sessionId = _sessionService.CreateSessionId(userId);
             }
             return loginResponse;
         }

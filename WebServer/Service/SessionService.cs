@@ -15,19 +15,22 @@ namespace WebServer.Service
 
         public string CreateSessionId(string userId)
         {
+            UserSession userSession = new UserSession();
+            userSession.SessionId = Guid.NewGuid().ToString();
+            userSession.UserId = userId;
+            userSession.ExpireTime = DateTime.Now.AddMinutes(60);
+
             // 중복 로그인 처리 
             if (_UserIdToSessionId.TryGetValue(userId, out UserSession loginUserSession))
             {
                 loginUserSession.State = StateType.Duplicated;
+                _UserIdToSessionId[userId] = userSession;
             }
-
-            UserSession userSession = new UserSession();
-            userSession.SessionId = Guid.NewGuid().ToString();
-            userSession.UserId = userId;
-            userSession.ExpireTime = DateTime.Now.AddMinutes(3);
-
+            else
+            {
+                _UserIdToSessionId.Add(userId, userSession);
+            }
             _sessionIdToUserSession.Add(userSession.SessionId, userSession);
-            _UserIdToSessionId.Add(userId, userSession);
 
             return userSession.SessionId;
         }
@@ -86,7 +89,7 @@ namespace WebServer.Service
                 return false;
             }
 
-            userSession.ExpireTime = DateTime.Now.AddMinutes(3);
+            userSession.ExpireTime = DateTime.Now.AddMinutes(60);
 
             return true;
         }

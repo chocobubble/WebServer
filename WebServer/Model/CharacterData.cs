@@ -10,13 +10,13 @@ namespace WebServer.Model
     [ProtoContract]
     public enum WeaponType
     {
-        [ProtoEnum]
+        [ProtoMember(0)]
         EWT_DEFAULT = 0,
-        [ProtoEnum]
+        [ProtoMember(1)]
         EWT_RIFLE = 1,
-        [ProtoEnum]
+        [ProtoMember(2)]
         EWT_PISTOL = 2,
-        [ProtoEnum]
+        [ProtoMember(3)]
         EWT_SHOTGUN = 3
     }
 
