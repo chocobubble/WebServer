@@ -23,7 +23,7 @@ namespace WebServer.Service
             {
                 _characterDataRepository.SaveCharacterData(userId, data);
             }
-
+            Console.WriteLine("Save Character Data in service");
             return true;
         }
 

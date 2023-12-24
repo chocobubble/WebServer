@@ -20,7 +20,6 @@ namespace WebServer.Repository
 	public class SessionFromRedis : ISessionRepository
     {
         private IDatabase sessionDb;
-        private IDatabase characterDb;
         private SessionExpireTime sessionExpireTime = new SessionExpireTime();
         private TimeSpan timeSpan = new TimeSpan(0, 10, 0);
 
@@ -32,7 +31,6 @@ namespace WebServer.Repository
             });
 
             sessionDb = redisConnection.GetDatabase(1);
-            characterDb = redisConnection.GetDatabase(2);
             Console.WriteLine(sessionDb.Ping());
             Console.WriteLine(redisConnection.IsConnected);
         }
