@@ -2,7 +2,7 @@
 using WebServer.Model;
 using WebServer.Repository.Interface;
 
-namespace WebServer.Repository
+namespace WebServer.Deprecated
 {
 	public class AccountRepository : IAccountRepository
 	{
@@ -49,18 +49,6 @@ namespace WebServer.Repository
             {
                 return false;
             }
-        }
-
-        public CharacterData GetUserCharacterData(string userId)
-		{
-            if (_accountTable.ContainsKey(userId))
-            {
-                return _accountTable[userId].characterData;
-            }
-            else
-            {
-                return null;
-            }   
         }
     }
 }

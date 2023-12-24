@@ -20,8 +20,11 @@ builder.Services.AddControllers(options =>
 //builder.Services.AddControllers();
 builder.Services.AddSingleton<IAccountService, AccountService>();
 builder.Services.AddSingleton<ISessionService, SessionService>();
-builder.Services.AddSingleton<IAccountRepository, AccountRepository>();
+//builder.Services.AddSingleton<IAccountRepository, AccountRepository>();
+builder.Services.AddSingleton<IAccountRepository, AccountFromRedis>();
 builder.Services.AddSingleton<ICharacterDataRepository, CharacterDataRepository>();
+builder.Services.AddSingleton<ISessionRepository, SessionFromRedis>();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

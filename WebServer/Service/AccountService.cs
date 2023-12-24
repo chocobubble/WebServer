@@ -11,13 +11,10 @@ namespace WebServer.Service
         private ILogger<AccountController> _logger;
         private IAccountRepository _accountRepository;
 
-        private HashSet<string> _loginUsers;
-
         public AccountService(ILogger<AccountController> logger, IAccountRepository accountRepository)
 		{
             _logger = logger;
             _accountRepository = accountRepository;
-            _loginUsers = new HashSet<string>();
         }
 
         public bool CreateAccount(string inputId, string inputPwd)

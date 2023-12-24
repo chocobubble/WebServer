@@ -1,5 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using WebServer.HttpCommand;
+using WebServer.Repository;
+using WebServer.Repository.Interface;
+using WebServer.Service;
 using WebServer.Service.Interface;
 
 namespace WebServer.Controllers
@@ -10,13 +13,15 @@ namespace WebServer.Controllers
     { 
         private readonly ILogger<SessionController> _logger;
         private readonly IAccountService _accountService;
-        private readonly ISessionService _sessionService;
+        //private readonly ISessionService _sessionService;
+        private readonly ISessionRepository _sessionFromRedis;
 
-        public SessionController(ILogger<SessionController> logger, IAccountService accountService, ISessionService sessionService)
+        public SessionController(ILogger<SessionController> logger, IAccountService accountService, ISessionRepository sessionRepository)
         {
             this._logger = logger;
             this._accountService = accountService;
-            this._sessionService = sessionService;
+            //this._sessionService = sessionService;
+            this._sessionFromRedis = sessionRepository;
         }
         
         [HttpPost]
@@ -27,16 +32,21 @@ namespace WebServer.Controllers
             LoginResponse loginResponse = new LoginResponse();
             if (!_accountService.IsValidId(userId))
             {
+                _logger.Log(LogLevel.Warning, "Wrong Id");
                 loginResponse.apiReturnCode = ApiReturnCode.InvalidUserId;
             }
             else if (!_accountService.IsValidPassword(userId, userPwd))
             {
+
+                _logger.Log(LogLevel.Warning, "Wrong Password");
                 loginResponse.apiReturnCode = ApiReturnCode.InvalidUserPassword;
             }
             else
             {
+                _logger.Log(LogLevel.Warning, "Login Success");
                 loginResponse.apiReturnCode = ApiReturnCode.Success;
-                loginResponse.sessionId = _sessionService.CreateSessionId(userId);
+                //loginResponse.sessionId = _sessionService.CreateSessionId(userId);
+                loginResponse.sessionId = _sessionFromRedis.CreateSessionId(userId);
             }
             return loginResponse;
         }
@@ -44,7 +54,8 @@ namespace WebServer.Controllers
         [HttpPost]
         public LogoutResponse LogOut(LogoutRequest logoutRequest)
         {
-            _sessionService.DeleteSessionId(logoutRequest.sessionId);
+            //_sessionService.DeleteSessionId(logoutRequest.sessionId);
+            _sessionFromRedis.DeleteSessionId(logoutRequest.sessionId);
 
             LogoutResponse logoutResponse = new LogoutResponse();
             logoutResponse.apiReturnCode = ApiReturnCode.Success;
@@ -59,11 +70,14 @@ namespace WebServer.Controllers
 
             RefreshSessionResponse refreshSessionResponse = new RefreshSessionResponse();
 
-            if (_sessionService.IsValidSessionId(requestSessionId))
+            //if (_sessionService.IsValidSessionId(requestSessionId))
+            if (_sessionFromRedis.IsValidSessionId(requestSessionId))
             {
-                _sessionService.RefreshSessionId(requestSessionId);
+                //_sessionService.RefreshSessionId(requestSessionId);
+                _sessionFromRedis.RefreshSessionId(requestSessionId);
                 // 중복 로그인 된 상태인지 확인
-                if (_sessionService.IsDuplicatedLogin(requestSessionId))
+                //if (_sessionService.IsDuplicatedLogin(requestSessionId))
+                if (_sessionFromRedis.IsDuplicatedLogin(requestSessionId))
                 {
                     refreshSessionResponse.apiReturnCode = ApiReturnCode.DuplicatedLogin;
                 }
