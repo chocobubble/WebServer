@@ -13,15 +13,15 @@ namespace WebServer.Controllers
     { 
         private readonly ILogger<SessionController> _logger;
         private readonly IAccountService _accountService;
-        //private readonly ISessionService _sessionService;
-        private readonly ISessionRepository _sessionFromRedis;
+        private readonly ISessionService _sessionService;
+        //private readonly ISessionRepository _sessionFromRedis;
 
-        public SessionController(ILogger<SessionController> logger, IAccountService accountService, ISessionRepository sessionRepository)
+        public SessionController(ILogger<SessionController> logger, IAccountService accountService, ISessionService sessionService)
         {
             this._logger = logger;
             this._accountService = accountService;
-            //this._sessionService = sessionService;
-            this._sessionFromRedis = sessionRepository;
+            this._sessionService = sessionService;
+            //this._sessionFromRedis = sessionRepository;
         }
         
         [HttpPost]
@@ -44,9 +44,16 @@ namespace WebServer.Controllers
             else
             {
                 _logger.Log(LogLevel.Warning, "Login Success");
-                loginResponse.apiReturnCode = ApiReturnCode.Success;
-                //loginResponse.sessionId = _sessionService.CreateSessionId(userId);
-                loginResponse.sessionId = _sessionFromRedis.CreateSessionId(userId);
+                if (_sessionService.IsDuplicatedLogin(userId))
+                {
+                    loginResponse.apiReturnCode = ApiReturnCode.DuplicatedLogin;
+                }
+                else
+                {
+                    loginResponse.apiReturnCode = ApiReturnCode.Success;
+                }
+                loginResponse.sessionId = _sessionService.CreateSessionId(userId);
+                //loginResponse.sessionId = _sessionFromRedis.CreateSessionId(userId);
             }
             return loginResponse;
         }
@@ -54,8 +61,8 @@ namespace WebServer.Controllers
         [HttpPost]
         public LogoutResponse LogOut(LogoutRequest logoutRequest)
         {
-            //_sessionService.DeleteSessionId(logoutRequest.sessionId);
-            _sessionFromRedis.DeleteSessionId(logoutRequest.sessionId);
+            _sessionService.DeleteSessionId(logoutRequest.sessionId);
+            //_sessionFromRedis.DeleteSessionId(logoutRequest.sessionId);
 
             LogoutResponse logoutResponse = new LogoutResponse();
             logoutResponse.apiReturnCode = ApiReturnCode.Success;
@@ -70,14 +77,14 @@ namespace WebServer.Controllers
 
             RefreshSessionResponse refreshSessionResponse = new RefreshSessionResponse();
 
-            //if (_sessionService.IsValidSessionId(requestSessionId))
-            if (_sessionFromRedis.IsValidSessionId(requestSessionId))
+            if (_sessionService.IsValidSessionId(requestSessionId))
+            //if (_sessionFromRedis.IsValidSessionId(requestSessionId))
             {
-                //_sessionService.RefreshSessionId(requestSessionId);
-                _sessionFromRedis.RefreshSessionId(requestSessionId);
+                _sessionService.RefreshSessionId(requestSessionId);
+                //_sessionFromRedis.RefreshSessionId(requestSessionId);
                 // 중복 로그인 된 상태인지 확인
-                //if (_sessionService.IsDuplicatedLogin(requestSessionId))
-                if (_sessionFromRedis.IsDuplicatedLogin(requestSessionId))
+                if (_sessionService.IsDuplicatedLogin(requestSessionId))
+                //if (_sessionFromRedis.IsDuplicatedLogin(requestSessionId))
                 {
                     refreshSessionResponse.apiReturnCode = ApiReturnCode.DuplicatedLogin;
                 }

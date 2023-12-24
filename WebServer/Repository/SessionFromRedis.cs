@@ -73,9 +73,9 @@ namespace WebServer.Repository
             return sessionDb.StringGet(MakeSessionKey(sessionId));
         }
 
-        public bool IsDuplicatedLogin(string sessionId)
+        public bool IsDuplicatedLogin(string userId)
         {
-            if (sessionDb.StringGet(MakeSessionKey(sessionId)) != RedisValue.Null)
+            if (sessionDb.StringGet(MakeUserKey(userId)) != RedisValue.Null)
             {
                 return true;
             }

@@ -6,7 +6,7 @@ namespace WebServer.Service.Interface
 {
     public interface IRankingService
     {
-        public int GetRank(string userId);
+        public int GetRank(string sessionId);
     }
 }
 

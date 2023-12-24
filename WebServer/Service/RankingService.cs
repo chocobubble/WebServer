@@ -6,17 +6,20 @@ namespace WebServer.Service
 {
     public class RankingService : IRankingService
     {
-        private ICharacterDataRepository _characterDataRepository;
+        private readonly IRankRepository _rankFromRedis;
+        private readonly ISessionRepository _sessionRepository;
 
-        public RankingService(ICharacterDataRepository characterDataRepository)
+        public RankingService(IRankRepository rankRepository, ISessionRepository sessionFromRedis)
         {
-            _characterDataRepository = characterDataRepository;
+            _rankFromRedis = rankRepository;
+            _sessionRepository = sessionFromRedis;
         }
 
-        public int GetRank(string userId)
+        public int GetRank(string sessionId)
         {
-            _characterDataRepository.SortRankingList();
-            return _characterDataRepository.GetRank(userId);
+            _sessionRepository.RefreshSessionId(sessionId);
+            string userId = _sessionRepository.GetUserIdFromSessionId(sessionId);
+            return (int)_rankFromRedis.GetMyRank(userId);
         }
     }
 }

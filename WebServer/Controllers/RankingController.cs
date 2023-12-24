@@ -12,23 +12,30 @@ namespace WebServer.Controllers
     public class RankingController : ControllerBase
     {
         private readonly ILogger<RankingController> _logger;
-        private readonly RankingService _rankingService;
+        private readonly IRankingService _rankingService;
         private readonly ISessionService _sessionService;
 
-        public RankingController(ILogger<RankingController> logger, ICharacterDataRepository characterDataRepository, ISessionService sessionService)
+        public RankingController(ILogger<RankingController> logger, IRankingService rankingService, ISessionService sessionService)
         {
             _logger = logger;
-            _rankingService = new RankingService(characterDataRepository);
+            _rankingService = rankingService;
             _sessionService = sessionService;
         }
 
         [HttpPost]
         public RankResponse GetRank(RankRequest request)
         {
-            string userId = _sessionService.GetUserIdFromSessionId(request.sessionId);
             RankResponse response = new RankResponse();
-            response.ranking = _rankingService.GetRank(userId);
-            response.apiReturnCode = ApiReturnCode.Success;
+            if (_sessionService.IsValidSessionId(request.sessionId))
+            {
+                response.ranking = _rankingService.GetRank(request.sessionId);
+                response.apiReturnCode = ApiReturnCode.Success;
+            }
+            else
+            {
+                response.ranking = -1;
+                response.apiReturnCode = ApiReturnCode.InvalidSessionId;
+            }
             return response;
         }
     }

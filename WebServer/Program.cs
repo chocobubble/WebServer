@@ -25,6 +25,10 @@ builder.Services.AddSingleton<IAccountRepository, AccountFromRedis>();
 //builder.Services.AddSingleton<ICharacterDataRepository, CharacterDataRepository>();
 builder.Services.AddSingleton<ICharacterDataRepository, CharacterDataFromRedis>();
 builder.Services.AddSingleton<ISessionRepository, SessionFromRedis>();
+builder.Services.AddSingleton<IRankingService, RankingService>();
+builder.Services.AddSingleton<IDataService, DataService>();
+builder.Services.AddSingleton<IRankRepository, RankFromRedis>();
+
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

@@ -6,15 +6,19 @@ namespace WebServer.Service
 {
     public class DataService : IDataService
     {
-        private ICharacterDataRepository _characterDataRepository;
+        private readonly ICharacterDataRepository _characterDataRepository;
+        private readonly ISessionRepository _sessionRepository;
 
-        public DataService(ICharacterDataRepository characterDataRepository)
+        public DataService(ICharacterDataRepository characterDataRepository, ISessionRepository sessionRepository)
         {
             _characterDataRepository = characterDataRepository;
+            _sessionRepository = sessionRepository;
         }
 
-        public bool SaveCharacterData(string userId, CharacterData data)
+        public bool SaveCharacterData(string sessionId, CharacterData data)
         {
+            _sessionRepository.RefreshSessionId(sessionId);
+            string userId = _sessionRepository.GetUserIdFromSessionId(sessionId);
             if (!_characterDataRepository.HasCharacterData(userId))
             {
                 _characterDataRepository.AddCharacterData(userId, data);
@@ -27,8 +31,10 @@ namespace WebServer.Service
             return true;
         }
 
-        public CharacterData LoadCharacterData(string userId)
+        public CharacterData LoadCharacterData(string sessionId)
         {
+            _sessionRepository.RefreshSessionId(sessionId);
+            string userId = _sessionRepository.GetUserIdFromSessionId(sessionId);
             if (!_characterDataRepository.HasCharacterData(userId))
             {
                 // TODO : CharacterData 내부에 유효한 데이터 검증 변수 넣기

@@ -12,13 +12,13 @@ namespace WebServer.Controllers
     public class DataController : ControllerBase
     {
         private readonly ILogger<DataController> _logger;
-        private readonly DataService _dataService;
+        private readonly IDataService _dataService;
         private readonly ISessionService _sessionService;
 
-        public DataController(ILogger<DataController> logger, ICharacterDataRepository characterDataRepository, ISessionService sessionService)
+        public DataController(ILogger<DataController> logger, IDataService dataService, ISessionService sessionService)
         {
             _logger = logger;
-            _dataService = new DataService(characterDataRepository);
+            _dataService = dataService;
             _sessionService = sessionService;
         }
 
