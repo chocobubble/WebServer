@@ -30,11 +30,11 @@ namespace WebServer.Model
         [ProtoMember(3)]
         public string playerName { get; set; }
         [ProtoMember(4)]
-        public int gold { get; set; }
+        public Int64 gold { get; set; }
         [ProtoMember(5)]
         public WeaponData weaponData { get; set; }
         [ProtoMember(6)]
-        public int rifleAmmo { get; set; }
+        public Int64 rifleAmmo { get; set; }
     }
 
     [ProtoContract]

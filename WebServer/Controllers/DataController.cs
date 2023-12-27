@@ -29,22 +29,18 @@ namespace WebServer.Controllers
 
             if (!_sessionService.IsValidSession(request.sessionId))
             {
-                Console.WriteLine("Invalid Session");
                 response.apiReturnCode = ApiReturnCode.Fail;
             }
             else if (_sessionService.IsDuplicatedLogin(request.sessionId))
             {
-                Console.WriteLine("Duplicated Login");
                 response.apiReturnCode = ApiReturnCode.DuplicatedLogin;
             }
             else if (!_dataService.SaveCharacterData(request.sessionId, request.characterData))
             {
-                Console.WriteLine("Fail to Save Character Data");
                 response.apiReturnCode = ApiReturnCode.Fail;
             }
             else // 캐릭터 데이터 저장 성공
             {
-                Console.WriteLine("Save Character Data");
                 response.apiReturnCode = ApiReturnCode.Success;
             }
 
@@ -66,9 +62,24 @@ namespace WebServer.Controllers
             }
             else // 캐릭터 데이터 로딩 성공
             {
-                response.characterData = _dataService.LoadCharacterData(request.sessionId);
+                CharacterData loadData = _dataService.LoadCharacterData(request.sessionId);
+                response.characterData = loadData;
                 response.apiReturnCode = ApiReturnCode.Success;
             }
+
+            return response;
+        }
+
+        [HttpPost]
+        public CharacterDataSaveRequest ProtoTest(CharacterDataSaveRequest request)
+        {
+
+            return request;
+        }
+
+        [HttpPost]
+        public CharacterDataLoadResponse ProtoTest2(CharacterDataLoadResponse response)
+        {
 
             return response;
         }

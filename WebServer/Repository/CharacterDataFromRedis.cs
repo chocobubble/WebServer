@@ -27,14 +27,12 @@ namespace WebServer.Repository
             string serializedCharacterData = JsonSerializer.Serialize(characterData);
             characterDb.StringSet(userId, serializedCharacterData);
             Console.WriteLine("Save Character Data in repository");
-            // TODO: rank 넣
         }
 
         public void AddCharacterData(string userId, CharacterData characterData)
         {
             string serializedCharacterData = JsonSerializer.Serialize(characterData);
             characterDb.StringSet(userId, serializedCharacterData);
-            // TODO: rank 넣기
         }
 
         public bool HasCharacterData(string userId)

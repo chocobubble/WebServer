@@ -10,6 +10,7 @@
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'http' " />
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.11" />
+    <PackageReference Include="StackExchange.Redis" Version="2.7.10" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
     <PackageReference Include="Google.Protobuf" Version="3.25.1" />
     <PackageReference Include="Grpc.AspNetCore" Version="2.59.0" />
@@ -33,12 +34,10 @@
     <None Remove="HttpCommand\" />
     <None Remove="Formatter\" />
     <None Remove="tests\" />
-    <None Remove="Protos\Check\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="HttpCommand\" />
     <Folder Include="Formatter\" />
     <Folder Include="tests\" />
-    <Folder Include="Protos\Check\" />
   </ItemGroup>
 </Project>

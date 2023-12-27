@@ -2,7 +2,7 @@
 using WebServer.Repository.Interface;
 
 
-namespace WebServer.Repository
+namespace WebServer.Deprecated
 {
 
     public class CharacterDataRepository : ICharacterDataRepository

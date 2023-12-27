@@ -32,18 +32,14 @@ namespace WebServer.Controllers
             LoginResponse loginResponse = new LoginResponse();
             if (!_accountService.IsValidId(userId))
             {
-                _logger.Log(LogLevel.Warning, "Wrong Id");
                 loginResponse.apiReturnCode = ApiReturnCode.InvalidUserId;
             }
             else if (!_accountService.IsValidPassword(userId, userPwd))
             {
-
-                _logger.Log(LogLevel.Warning, "Wrong Password");
                 loginResponse.apiReturnCode = ApiReturnCode.InvalidUserPassword;
             }
             else
             {
-                _logger.Log(LogLevel.Warning, "Login Success");
                 if (_sessionService.IsDuplicatedLogin(userId))
                 {
                     loginResponse.apiReturnCode = ApiReturnCode.DuplicatedLogin;
@@ -53,7 +49,6 @@ namespace WebServer.Controllers
                     loginResponse.apiReturnCode = ApiReturnCode.Success;
                 }
                 loginResponse.sessionId = _sessionService.CreateSessionId(userId);
-                //loginResponse.sessionId = _sessionFromRedis.CreateSessionId(userId);
             }
             return loginResponse;
         }
@@ -62,7 +57,6 @@ namespace WebServer.Controllers
         public LogoutResponse LogOut(LogoutRequest logoutRequest)
         {
             _sessionService.DeleteSessionId(logoutRequest.sessionId);
-            //_sessionFromRedis.DeleteSessionId(logoutRequest.sessionId);
 
             LogoutResponse logoutResponse = new LogoutResponse();
             logoutResponse.apiReturnCode = ApiReturnCode.Success;
@@ -78,13 +72,10 @@ namespace WebServer.Controllers
             RefreshSessionResponse refreshSessionResponse = new RefreshSessionResponse();
 
             if (_sessionService.IsValidSessionId(requestSessionId))
-            //if (_sessionFromRedis.IsValidSessionId(requestSessionId))
             {
                 _sessionService.RefreshSessionId(requestSessionId);
-                //_sessionFromRedis.RefreshSessionId(requestSessionId);
                 // 중복 로그인 된 상태인지 확인
                 if (_sessionService.IsDuplicatedLogin(requestSessionId))
-                //if (_sessionFromRedis.IsDuplicatedLogin(requestSessionId))
                 {
                     refreshSessionResponse.apiReturnCode = ApiReturnCode.DuplicatedLogin;
                 }

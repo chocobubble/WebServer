@@ -1,8 +1,0 @@
-syntax = "proto3";
-
-message CreateAccountRequest 
-{
-    string sessionId = 1;
-    string id = 2;
-    string password = 3;
-}
