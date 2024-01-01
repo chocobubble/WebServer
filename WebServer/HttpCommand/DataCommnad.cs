@@ -14,9 +14,9 @@ namespace WebServer.HttpCommand
     [ProtoContract]
     public class CharacterDataLoadResponse
     {
-        [ProtoMember(1)]
-        public ApiReturnCode apiReturnCode { get; set; }
         [ProtoMember(2)]
+        public ApiReturnCode apiReturnCode { get; set; }
+        [ProtoMember(1)]
         public CharacterData characterData { get; set; }
     }
 
@@ -42,16 +42,23 @@ namespace WebServer.HttpCommand
     }
 
     [ProtoContract]
+    public abstract class BaseResponse3
+    {
+        [ProtoMember(1)]
+        public int test = 5;
+    }
+
+    [ProtoContract]
     public class CharacterDataLoadResponse2 : BaseResponse
     {
-        [ProtoMember(2)]
+        [ProtoMember(1)]
         public CharacterData characterData { get; set; }
     }
 
     [ProtoContract]
     public class CharacterDataSaveRequest2 : BaseRequest
     {
-        [ProtoMember(2)]
+        [ProtoMember(1)]
         public CharacterData characterData { get; set; }
     }
 

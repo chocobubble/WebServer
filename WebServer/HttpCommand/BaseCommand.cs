@@ -1,14 +1,15 @@
 ﻿using System;
+using System.Runtime.Serialization;
 using ProtoBuf;
 namespace WebServer.HttpCommand
 {
 	[ProtoContract]
-    [ProtoInclude(2, typeof(CreateAccountRequest))]
-    [ProtoInclude(3, typeof(CharacterDataLoadRequest))]
-    [ProtoInclude(4, typeof(CharacterDataSaveRequest))]
-    [ProtoInclude(5, typeof(LoginRequest))]
-    [ProtoInclude(6, typeof(LogoutRequest))]
-    [ProtoInclude(7, typeof(RefreshSessionRequest))]
+    [ProtoInclude(12, typeof(CreateAccountRequest))]
+    [ProtoInclude(13, typeof(CharacterDataLoadRequest))]
+    [ProtoInclude(14, typeof(CharacterDataSaveRequest))]
+    [ProtoInclude(15, typeof(LoginRequest))]
+    [ProtoInclude(16, typeof(LogoutRequest))]
+    [ProtoInclude(17, typeof(RefreshSessionRequest))]
     public class BaseRequest
 	{
 		[ProtoMember(1)]
@@ -16,25 +17,60 @@ namespace WebServer.HttpCommand
 	}
 
 	[ProtoContract]
-    [ProtoInclude(2, typeof(CreateAccountResponse))]
-    [ProtoInclude(3, typeof(CharacterDataLoadResponse))]
-    [ProtoInclude(4, typeof(CharacterDataSaveResponse))]
-    [ProtoInclude(5, typeof(LoginResponse))]
-    [ProtoInclude(6, typeof(LogoutResponse))]
-    [ProtoInclude(7, typeof(RefreshSessionResponse))]
+    [ProtoInclude(2, typeof(CharacterDataLoadResponse2))]
     public class BaseResponse
 	{
-		[ProtoMember(1)]
+        [ProtoMember(1)]
         public ApiReturnCode apiReturnCode { get; set; }
     }
+
+    [ProtoContract]
+    [ProtoInclude(22, typeof(CreateAccountResponse))]
+    [ProtoInclude(23, typeof(CharacterDataLoadResponse))]
+    [ProtoInclude(24, typeof(CharacterDataSaveResponse))]
+    [ProtoInclude(25, typeof(LoginResponse))]
+    [ProtoInclude(26, typeof(LogoutResponse))]
+    [ProtoInclude(27, typeof(RefreshSessionResponse))]
+    public class BaseResponse2
+    {
+        [ProtoMember(2)]
+        public ApiReturnCode apiReturnCode { get; set; }
+    }
+
+    [ProtoContract]
+    public enum ApiReturnCode1
+    {
+        [EnumMember]
+        [ProtoEnum]
+        None = 0,
+        [EnumMember]
+        [ProtoEnum]
+        Success = 1,
+        [EnumMember]
+        [ProtoEnum]
+        Fail = 2,
+        [EnumMember]
+        [ProtoEnum]
+        InvalidSessionId = 3,
+        [EnumMember]
+        [ProtoEnum]
+        InvalidUserId = 4,
+        [EnumMember]
+        [ProtoEnum]
+        InvalidUserPassword = 5,
+        [EnumMember]
+        [ProtoEnum]
+        DuplicatedLogin = 6,
+    }
+
 
     [ProtoContract]
     public enum ApiReturnCode
     {
         None = 0,
-		[ProtoMember(1)]
+        [ProtoMember(1)]
         Success = 1,
-		[ProtoMember(2)]
+        [ProtoMember(2)]
         Fail = 2,
         [ProtoMember(3)]
         InvalidSessionId = 3,
