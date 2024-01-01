@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using ProtoBuf;
@@ -9,6 +10,23 @@ namespace WebServer.Model
 {
     [ProtoContract]
     public enum WeaponType
+    {
+        [EnumMember]
+        [ProtoEnum]
+        EWT_DEFAULT = 0,
+        [EnumMember]
+        [ProtoEnum]
+        EWT_RIFLE = 1,
+        [EnumMember]
+        [ProtoEnum]
+        EWT_PISTOL = 2,
+        [EnumMember]
+        [ProtoEnum]
+        EWT_SHOTGUN = 3
+    }
+
+    [ProtoContract]
+    public enum WeaponType2
     {
         [ProtoMember(0)]
         EWT_DEFAULT = 0,
