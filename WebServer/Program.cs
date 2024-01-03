@@ -4,8 +4,12 @@ using WebServer.Repository.Interface;
 using WebServer.Repository;
 using Microsoft.Net.Http.Headers;
 using ProtobufFormatter.Formatters;
+using ProtoBuf.Meta;
+using WebApiContrib.Core.Formatter.Protobuf;
+using WebServer.Filter;
 
 var builder = WebApplication.CreateBuilder(args);
+
 
 builder.Services.AddControllers(options =>
 {
@@ -14,7 +18,18 @@ builder.Services.AddControllers(options =>
     options.FormatterMappings
         .SetMediaTypeMappingForFormat("protobuf",
           MediaTypeHeaderValue.Parse("application/x-protobuf"));
+    options.Filters.Add<GlobalActionFilter>();
+    options.Filters.Add<GlobalExceptionFilter>();
 });
+
+/*
+builder.Services.AddControllers(options =>
+{
+    options.FormatterMappings
+        .SetMediaTypeMappingForFormat("protobuf",
+          MediaTypeHeaderValue.Parse("application/x-protobuf"));
+}).AddProtobufFormatters();
+*/
 // Add services to the container.
 
 //builder.Services.AddControllers();

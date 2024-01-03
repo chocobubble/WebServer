@@ -137,5 +137,17 @@ namespace WebServer.Controllers
             return proto;
         }
 
+        [HttpPost]
+        public string ErrorTest([FromBody] CreateAccountRequest request)
+        {
+            return "create aacccount";
+        }
+
+        [HttpPost]
+        public BaseResponse ErrorTest2(BaseResponse response)
+        {
+            return response;
+        }
+
     }
 }
