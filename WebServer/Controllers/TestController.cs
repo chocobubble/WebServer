@@ -149,5 +149,23 @@ namespace WebServer.Controllers
             return response;
         }
 
+        [HttpPost]
+        public string FilterTest(CreateAccountRequest request)
+        {
+            return "Create Account";
+        }
+
+        [HttpPost]
+        public string FilterTest2([FromBody] CreateAccountRequest request)
+        {
+            return "Create Account2";
+        }
+
+        [HttpPost]
+        public BaseResponse FilterTest3([FromBody] BaseResponse response)
+        {
+            return response;
+        }
+
     }
 }
