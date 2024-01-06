@@ -38,33 +38,6 @@ namespace WebServer.HttpCommand
     }
 
     [ProtoContract]
-    public enum ApiReturnCode1
-    {
-        [EnumMember]
-        [ProtoEnum]
-        None = 0,
-        [EnumMember]
-        [ProtoEnum]
-        Success = 1,
-        [EnumMember]
-        [ProtoEnum]
-        Fail = 2,
-        [EnumMember]
-        [ProtoEnum]
-        InvalidSessionId = 3,
-        [EnumMember]
-        [ProtoEnum]
-        InvalidUserId = 4,
-        [EnumMember]
-        [ProtoEnum]
-        InvalidUserPassword = 5,
-        [EnumMember]
-        [ProtoEnum]
-        DuplicatedLogin = 6,
-    }
-
-
-    [ProtoContract]
     public enum ApiReturnCode
     {
         None = 0,

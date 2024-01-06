@@ -5,14 +5,14 @@ using WebServer.Model;
 namespace WebServer.HttpCommand
 {
     [ProtoContract]
-    public class CharacterDataLoadRequest
+    public class CharacterDataLoadRequest2
     {
         [ProtoMember(1)]
         public string sessionId { get; set; }
     }
 
     [ProtoContract]
-    public class CharacterDataLoadResponse
+    public class CharacterDataLoadResponse2
     {
         [ProtoMember(2)]
         public ApiReturnCode apiReturnCode { get; set; }
@@ -21,7 +21,7 @@ namespace WebServer.HttpCommand
     }
 
     [ProtoContract]
-    public class CharacterDataSaveRequest
+    public class CharacterDataSaveRequest2
     {
         [ProtoMember(1)]
         public string sessionId { get; set; }
@@ -30,43 +30,34 @@ namespace WebServer.HttpCommand
     }
 
     [ProtoContract]
-    public class CharacterDataSaveResponse
+    public class CharacterDataSaveResponse2
     {
         [ProtoMember(1)]
         public ApiReturnCode apiReturnCode { get; set; }
     }
 
     [ProtoContract]
-    public class CharacterDataLoadRequest2 : BaseRequest
+    public class CharacterDataLoadRequest : BaseRequest
     {
     }
 
     [ProtoContract]
-    public abstract class BaseResponse3
-    {
-        [ProtoMember(1)]
-        public int test = 5;
-    }
-
-    [ProtoContract]
-    public class CharacterDataLoadResponse2 : BaseResponse
+    public class CharacterDataLoadResponse : BaseResponse
     {
         [ProtoMember(1)]
         public CharacterData characterData { get; set; }
     }
 
     [ProtoContract]
-    public class CharacterDataSaveRequest2 : BaseRequest
+    public class CharacterDataSaveRequest : BaseRequest
     {
         [ProtoMember(1)]
         public CharacterData characterData { get; set; }
     }
 
     [ProtoContract]
-    public class CharacterDataSaveResponse2 : BaseResponse
+    public class CharacterDataSaveResponse : BaseResponse
     {
-        [ProtoMember(1)]
-        public string sessionId { get; set; }
     }
 }
     

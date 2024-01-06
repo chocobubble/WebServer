@@ -19,17 +19,16 @@ namespace WebServer.Filter
             Console.WriteLine("GlobalExceptionFilter - OnException");
             //throw new NotImplementedException();
 
-
             BaseResponse baseResponse = new BaseResponse();
             baseResponse.apiReturnCode = ApiReturnCode.InvalidSessionId;
 
             //context.Result = new ContentResult() { Content = JsonSerializer.Serialize(baseResponse) };
-            byte[] stream;
+            
             MemoryStream memoryStream = new MemoryStream();
             Serializer.Serialize(memoryStream, baseResponse);
-            stream = memoryStream.ToArray();
-            context.Result = new ContentResult() { Content = Encoding.Default.GetString(stream) };
-
+            byte[] bytes;
+            bytes = memoryStream.ToArray();
+            context.Result = new ContentResult() { Content = Encoding.Default.GetString(bytes) };
         }
     }
 }

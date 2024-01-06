@@ -4,7 +4,7 @@ using ProtoBuf;
 namespace WebServer.HttpCommand
 {
     [ProtoContract]
-    public class LoginRequest
+    public class LoginRequest2
     {
         [ProtoMember(1)]
         public string sessionId { get; set; }
@@ -15,7 +15,7 @@ namespace WebServer.HttpCommand
     }
 
     [ProtoContract]
-    public class LoginResponse
+    public class LoginResponse2
     {
         [ProtoMember(1)]
         public ApiReturnCode apiReturnCode { get; set; }
@@ -24,28 +24,14 @@ namespace WebServer.HttpCommand
     }
 
     [ProtoContract]
-    public class LogoutRequest
+    public class LogoutRequest2
     {
         [ProtoMember(1)]
         public string sessionId { get; set; }
     }
 
     [ProtoContract]
-    public class LogoutResponse
-    {
-        [ProtoMember(1)]
-        public ApiReturnCode apiReturnCode { get; set; }
-    }
-
-    [ProtoContract]
-    public class RefreshSessionRequest
-    {
-        [ProtoMember(1)]
-        public string sessionId { get; set; }
-    }
-
-    [ProtoContract]
-    public class RefreshSessionResponse
+    public class LogoutResponse2
     {
         [ProtoMember(1)]
         public ApiReturnCode apiReturnCode { get; set; }
@@ -53,38 +39,38 @@ namespace WebServer.HttpCommand
 
 
     [ProtoContract]
-    public class LoginRequest2 : BaseRequest
+    public class LoginRequest : BaseRequest
     {
+        [ProtoMember(1)]
+        public string id { get; set; }
         [ProtoMember(2)]
-        public string Id { get; set; }
-        [ProtoMember(3)]
-        public string Password { get; set; }
+        public string password { get; set; }
     }
 
     [ProtoContract]
-    public class LoginResponse2 : BaseResponse
+    public class LoginResponse : BaseResponse
     {
-        [ProtoMember(2)]
-        public string SessionId { get; set; }
+        [ProtoMember(1)]
+        public string sessionId { get; set; }
     }
 
     [ProtoContract]
-    public class LogoutRequest2 : BaseRequest
+    public class LogoutRequest : BaseRequest
     {
     }
 
     [ProtoContract]
-    public class LogoutResponse2 : BaseResponse
+    public class LogoutResponse : BaseResponse
     {
     }
 
     [ProtoContract]
-    public class RefreshSessionRequest2 : BaseRequest
+    public class RefreshSessionRequest : BaseRequest
     {
     }
 
     [ProtoContract]
-    public class RefreshSessionResponse2 : BaseResponse
+    public class RefreshSessionResponse : BaseResponse
     {
     }
 }
