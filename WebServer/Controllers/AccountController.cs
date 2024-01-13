@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using WebServer.HttpCommand;
+using WebServer.Model;
 using WebServer.Service.Interface;
 
 namespace WebServer.Controllers
