@@ -1,7 +1,8 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
+using WebServer.Model;
 
-namespace WebServer.Model
+namespace WebServer.Repository
 {
 	public class AccountDbContext : DbContext
 	{
@@ -9,8 +10,9 @@ namespace WebServer.Model
 		{
 		}
 
-		public DbSet<AccountData> Account { get; set; }
-		public DbSet<Character> CharacterData { get; set; }
+		public DbSet<AccountDataEntity> Account { get; set; }
+		public DbSet<CharacterDataEntity> CharacterData { get; set; }
+        public DbSet<WeaponDataEntity> WeaponData { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

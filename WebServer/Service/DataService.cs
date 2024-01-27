@@ -38,7 +38,7 @@ namespace WebServer.Service
             {
                 // TODO : CharacterData 내부에 유효한 데이터 검증 변수 넣기
                 CharacterData data = new CharacterData();
-                data.playerName = "Invalid";
+                data.player_name = "Invalid";
                 return data;
             }
 

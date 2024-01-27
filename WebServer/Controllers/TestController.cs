@@ -24,15 +24,15 @@ namespace WebServer.Controllers
             CharacterDataLoadResponse2 response2 = new CharacterDataLoadResponse2();
             CharacterData data = new CharacterData();
             data.gold = 1;
-            data.playerName = "player";
+            data.player_name = "player";
             data.level = 2;
             data.exp = 5;
-            data.rifleAmmo = 11;
-            WeaponData weaponData2 = new WeaponData();
-            weaponData2.weaponEnhancementLevel = 5;
-            weaponData2.weaponLevel = 2;
-            weaponData2.weaponType = Model.WeaponType.EWT_RIFLE;
-            data.weaponData = weaponData2;
+            // data.rifleAmmo = 11;
+            // WeaponData weaponData2 = new WeaponData();
+            // weaponData2.weaponEnhancementLevel = 5;
+            // weaponData2.weaponLevel = 2;
+            // weaponData2.weaponType = Model.WeaponType.EWT_RIFLE;
+            // data.weaponData = weaponData2;
 
             response2.apiReturnCode = ApiReturnCode.Success;
             //response2.test = 7;
@@ -42,28 +42,6 @@ namespace WebServer.Controllers
 
             //_logger.Log(LogLevel.Warning, $"api return code : {response2.apiReturnCode}");
             return response2;
-        }
-
-        [HttpGet]
-        public CharacterDataLoadResponse test2()
-        {
-            CharacterDataLoadResponse response = new CharacterDataLoadResponse();
-            CharacterData data = new CharacterData();
-            data.gold = 1;
-            data.playerName = "player";
-            data.level = 2;
-            data.exp = 5;
-            data.rifleAmmo = 11;
-            WeaponData weaponData2 = new WeaponData();
-            weaponData2.weaponEnhancementLevel = 5;
-            weaponData2.weaponLevel = 2;
-            weaponData2.weaponType = Model.WeaponType.EWT_RIFLE;
-            data.weaponData = weaponData2;
-
-
-            response.apiReturnCode = ApiReturnCode.Success;
-            response.characterData = data;
-            return response;
         }
 
         [HttpPost]
@@ -78,40 +56,11 @@ namespace WebServer.Controllers
             return response2;
         }
 
-        [HttpPost]
-        public String test5(CharacterDataLoadResponse2 response2)
-        {
-            
-            ApiReturnCode code = response2.apiReturnCode;
-            CharacterData data = response2.characterData;
-            String str = $"api retrun code : {response2.apiReturnCode}\n";
-            //String str = $"api retrun code : {response2.test}\n";
-            str += $"weapon type : {data.weaponData.weaponType}\n";
-            str += $"player name : {data.playerName}\n";
-            //str += $"another api return code : {code}\n";
-            //Console.WriteLine(RuntimeTypeModel.Default.GetSchema(typeof(CharacterDataLoadResponse2)));
-            return str;
-        }
 
         [HttpPost]
         public CharacterDataLoadResponse2 test6()
         {
             return test1();
-        }
-
-        [HttpPost]
-        public String test7()
-        {
-            CharacterDataLoadResponse2 response2 = test1();
-            ApiReturnCode code = response2.apiReturnCode;
-            CharacterData data = response2.characterData;
-            String str = $"api retrun code : {response2.apiReturnCode}\n";
-            //String str = $"api retrun code : {response2.test}\n";
-            str += $"weapon type : {data.weaponData.weaponType}\n";
-            str += $"player name : {data.playerName}\n";
-            //str += $"another api return code : {code}\n";
-            //Console.WriteLine(RuntimeTypeModel.Default.GetSchema(typeof(CharacterDataLoadResponse2)));
-            return str;
         }
 
         [HttpPost]
@@ -124,8 +73,8 @@ namespace WebServer.Controllers
         [HttpPost]
         public string test9()
         {
-            //string proto = Serializer.GetProto<CharacterDataLoadResponse2>();
-            string proto = Serializer.GetProto<WeaponType>();
+            string proto = Serializer.GetProto<CharacterDataLoadResponse>();
+            //string proto = Serializer.GetProto<WeaponType>();
             return proto;
         }
 

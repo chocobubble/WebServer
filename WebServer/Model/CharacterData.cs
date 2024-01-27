@@ -46,6 +46,34 @@ namespace WebServer.Model
         [ProtoMember(2)]
         public int exp { get; set; }
         [ProtoMember(3)]
+        public string player_name { get; set; }
+        [ProtoMember(4)]
+        public int gold { get; set; }
+        [ProtoMember(5)]
+        public List<WeaponData> weapon_data { get; set; }
+    }
+
+    [ProtoContract]
+    public class WeaponData
+    {
+        [ProtoMember(1)]
+        public int weapon_id { get; set; }
+        [ProtoMember(2)]
+        public string unique_id { get; set; }
+        [ProtoMember(3)]
+        public int level { get; set; }
+        [ProtoMember(4)]
+        public int enhancement { get; set; }
+    }
+
+    [ProtoContract]
+    public class CharacterData2
+    {
+        [ProtoMember(1)]
+        public int level { get; set; }
+        [ProtoMember(2)]
+        public int exp { get; set; }
+        [ProtoMember(3)]
         public string playerName { get; set; }
         [ProtoMember(4)]
         public int gold { get; set; }
@@ -56,7 +84,7 @@ namespace WebServer.Model
     }
 
     [ProtoContract]
-    public class WeaponData
+    public class WeaponData2
     {
         [ProtoMember(1)]
         public WeaponType weaponType { get; set; }

@@ -4,9 +4,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace WebServer.Model
 {
     [Table("account")]
-    public class AccountData
+    public class AccountDataEntity
     {
-        public AccountData(int id, string userId, string userPassword )
+        public AccountDataEntity(int id, string userId, string userPassword )
         {
             Id = id;
             UserId = userId;
@@ -22,7 +22,7 @@ namespace WebServer.Model
     }
 
     [Table("character_data")]
-    public class Character
+    public class CharacterDataEntity
     {
         [Column("id")]
         public int Id { get; set; }
@@ -36,42 +36,66 @@ namespace WebServer.Model
         public string Name { get; set; }
         [Column("gold")]
         public int Gold { get; set; }
-        [Column("weapon_type")]
-        public int WeaponType { get; set; }
-        [Column("weapon_level")]
-        public int WeaponLevel { get; set; }
-        [Column("weapon_enhancement_level")]
-        public int WeaponEnhancementLevel { get; set; }
-        [Column("rifle_ammo")]
-        public int RifleAmmo { get; set; }
 
 
-        public Character() { }
+        public CharacterDataEntity() { }
 
-        public Character(int id, int accountId, CharacterData data)
+        public CharacterDataEntity(int id, int accountId)
         {
             Id = id;
             AccountId = accountId;
-            Level = data.level;
-            Exp = data.exp;
-            Name = data.playerName;
-            Gold = data.gold;
-            this.WeaponType = (int)data.weaponData.weaponType;
-            this.WeaponLevel = data.weaponData.weaponLevel;
-            this.WeaponEnhancementLevel = data.weaponData.weaponEnhancementLevel;
-            RifleAmmo = data.rifleAmmo;
+            Level = 1;
+            Exp = 0;
+            Name = "default";
+            Gold = 1000;
         }
 
         public void SaveCharactereData(CharacterData data)
         {
             Level = data.level;
             Exp = data.exp;
-            Name = data.playerName;
+            Name = data.player_name;
             Gold = data.gold;
-            this.WeaponType = (int)data.weaponData.weaponType;
-            this.WeaponLevel = data.weaponData.weaponLevel;
-            this.WeaponEnhancementLevel = data.weaponData.weaponEnhancementLevel;
-            RifleAmmo = data.rifleAmmo;
+            //this.WeaponType = (int)data.weaponData.weaponType;
+            //this.WeaponLevel = data.weaponData.weaponLevel;
+            //this.WeaponEnhancementLevel = data.weaponData.weaponEnhancementLevel;
         }
+    }
+
+    [Table("weapon_data")]
+    public class WeaponDataEntity
+    {
+        public WeaponDataEntity()
+        {
+        }
+
+        public WeaponDataEntity(string uid, int accountId)
+        {
+            Uid = uid;
+            AccountId = accountId;
+            WeaponId = 1;
+            Level = 1;
+            Enhancement = 0;
+        }
+
+        public WeaponDataEntity(string uid, int accountId, WeaponData weaponData)
+        {
+            Uid = uid;
+            AccountId = accountId;
+            WeaponId = weaponData.weapon_id;
+            Level = weaponData.level;
+            Enhancement = weaponData.enhancement;
+        }
+
+        [Column("uid")]
+        public string Uid { get; set; }
+        [Column("account_id")]
+        public int AccountId { get; set; }
+        [Column("weapon_id")]
+        public int WeaponId { get; set; }
+        [Column("level")]
+        public int Level { get; set; }
+        [Column("enhancement")]
+        public int Enhancement { get; set; }
     }
 }
